@@ -13,7 +13,7 @@ def release(_repo, _tag, _name, _target, _body, _draft, _prerelease):
     Then print out the response status and message.
     """
     response = requests.post(
-        'https://api.github.com/repos/open-eats/%s/releases' % _repo,
+        'https://api.github.com/repos/ownrecipes/%s/releases' % _repo,
         json={
           "tag_name": _tag,
           "target_commitish": _target,
@@ -45,7 +45,7 @@ A JSON file with release info in it. See below for an example.
 if __name__ == '__main__':
     import argparse
     parser = argparse.ArgumentParser(
-        description='OpenEats release script.'
+        description='OwnRecipes release script.'
     )
     # Require a json file as part of the script
     parser.add_argument(
@@ -79,10 +79,10 @@ if __name__ == '__main__':
 
     # The list of repos we want to push a release to.
     repos = [
-        'openeats-nginx',
-        'openeats-api',
-        'openeats-web',
-        'OpenEats'
+        'ownrecipes-nginx',
+        'ownrecipes-api',
+        'ownrecipes-web',
+        'OwnRecipes'
     ]
 
     # Run a release for all the repos with the data from json file.

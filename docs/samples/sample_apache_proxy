@@ -3,7 +3,7 @@
     ServerName my.domain.com
 
     # This passes all connections to this subdomain to the docker
-    # container for OpenEats
+    # container for OwnRecipes
     ProxyPreserveHost On
 
     ProxyPass / http://localhost:7000/

@@ -1,3 +1,5 @@
+# /opt/ownrecipes/ownrecipes-api/.env
+
 # Database config
 MYSQL_HOST=localhost
 MYSQL_DATABASE=ownrecipes

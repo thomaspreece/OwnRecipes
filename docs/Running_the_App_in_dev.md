@@ -7,11 +7,11 @@ The recommended way to run this app is with docker. You can install docker [here
 First you'll need to fork the appropriate repo that you are looking to make changes to, alone witht he core repo. See below for a sample.
 
 ```bash
-git clone https://github.com/open-eats/OpenEats.git
-cd OpenEats
+git clone https://github.com/ownrecipes/OwnRecipes.git
+cd OwnRecipes
 
-git clone https://github.com/open-eats/openeats-api.git
-git clone https://github.com/open-eats/openeats-web.git
+git clone https://github.com/ownrecipes/ownrecipes-api.git
+git clone https://github.com/ownrecipes/ownrecipes-web.git
 
 docker-compose build
 docker-compose up

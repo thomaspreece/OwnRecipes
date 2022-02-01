@@ -1,10 +1,9 @@
 # Folders
-openeats-api/
-openeats-web/
-openeats-nginx/
-openeats-mobile/
-openeats-demo/
-open-eats.github.io/
+ownrecipes-api/
+ownrecipes-web/
+ownrecipes-nginx/
+ownrecipes-mobile/
+ownrecipes-demo/
 site-media/
 static-files/
 node_modules/

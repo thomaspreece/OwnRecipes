@@ -1,12 +1,12 @@
 version: '2.3'
 services:
   api:
-    build: openeats-api/
+    build: ownrecipes-api/
     command: python manage.py runserver 0.0.0.0:8000
     env_file:
       env_dev.list
     volumes:
-      - ./openeats-api:/code
+      - ./ownrecipes-api:/code
       - static-files:/code/static-files
       - site-media:/code/site-media
     depends_on:
@@ -14,12 +14,12 @@ services:
     ports:
       - "8000:8000"
   web:
-    build: openeats-web/
+    build: ownrecipes-web/
     command: yarn dev
     env_file:
       env_dev.list
     volumes:
-      - ./openeats-web:/code
+      - ./ownrecipes-web:/code
     depends_on:
       - api
     ports:

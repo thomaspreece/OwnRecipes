@@ -1,5 +1,5 @@
 # Database config
-MYSQL_DATABASE=openeats
+MYSQL_DATABASE=ownrecipes
 MYSQL_ROOT_PASSWORD=root
 
 # Django config

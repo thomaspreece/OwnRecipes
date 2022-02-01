@@ -1,8 +1,8 @@
 version: '2.3'
 services:
   api:
-    image: openeats/openeats-api:latest
+    image: ownrecipes/ownrecipes-api:latest
   web:
-    image: openeats/openeats-web:latest
+    image: ownrecipes/ownrecipes-web:latest
   nginx:
-    image: openeats/openeats-nginx:latest
+    image: ownrecipes/ownrecipes-nginx:latest

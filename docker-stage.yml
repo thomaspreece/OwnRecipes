@@ -1,7 +1,7 @@
 version: '2.3'
 services:
   api:
-    build: openeats-api/
+    build: ownrecipes-api/
     command: /startup/prod-entrypoint.sh
     restart: on-failure
     volumes:
@@ -13,7 +13,7 @@ services:
     env_file:
       env_stg.list
   web:
-    build: openeats-web/
+    build: ownrecipes-web/
     command: yarn start
     volumes:
       - public-ui:/code/build
@@ -32,14 +32,14 @@ services:
     env_file:
       env_stg.list
   nginx:
-    build: openeats-nginx/
+    build: ownrecipes-nginx/
     command: ./start.sh
     ports:
       - "80:80"
     volumes:
-      - static-files:/var/www/html/openeats-static/static-files
-      - site-media:/var/www/html/openeats-static/site-media
-      - public-ui:/var/www/html/openeats-static/public-ui
+      - static-files:/var/www/html/ownrecipes-static/static-files
+      - site-media:/var/www/html/ownrecipes-static/site-media
+      - public-ui:/var/www/html/ownrecipes-static/public-ui
     depends_on:
       - api
       - web

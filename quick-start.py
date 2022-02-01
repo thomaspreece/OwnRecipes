@@ -8,9 +8,9 @@ from subprocess import call, Popen, PIPE
 
 def update_image_tags(version=None):
     """
-    A simple function to configure the OpenEats version.
+    A simple function to configure the OwnRecipes version.
 
-    :param version: The version of OpenEats the users wants to run.
+    :param version: The version of OwnRecipes the users wants to run.
                     This is a git Tag.
     :return: A file called `docker-prod.version.yml`.
              With the version of each image to pull.
@@ -19,11 +19,11 @@ def update_image_tags(version=None):
     version = '''version: '2.3'
 services:
   api:
-    image: openeats/openeats-api:%s
+    image: ownrecipes/ownrecipes-api:%s
   web:
-    image: openeats/openeats-web:%s
+    image: ownrecipes/ownrecipes-web:%s
   nginx:
-    image: openeats/openeats-nginx:%s
+    image: ownrecipes/ownrecipes-nginx:%s
 ''' % (version, version, version)
     with open('docker-prod.version.yml', 'w') as f:
         f.write(version)
@@ -35,18 +35,18 @@ def download_images(version=None):
     print("==================")
     print("Downloading Images")
     print("==================")
-    call(['docker', 'pull', 'openeats/openeats-api:' + version])
-    call(['docker', 'pull', 'openeats/openeats-web:' + version])
-    call(['docker', 'pull', 'openeats/openeats-nginx:' + version])
+    call(['docker', 'pull', 'ownrecipes/ownrecipes-api:' + version])
+    call(['docker', 'pull', 'ownrecipes/ownrecipes-web:' + version])
+    call(['docker', 'pull', 'ownrecipes/ownrecipes-nginx:' + version])
 
 
 def start_containers():
     """
     Takes a back up of the Recipe images and DB.
-    Restarts OpenEats with a new (or the same) version.
+    Restarts OwnRecipes with a new (or the same) version.
     """
     print("==================")
-    print("Starting OpenEats")
+    print("Starting OwnRecipes")
     print("==================")
 
     # Check if the DB is up and running locally.
@@ -54,18 +54,18 @@ def start_containers():
     # If the user is using a remote DB, do nothing.
     # If no DB is found, Start the docker DB and wait 45s to start.
     p = Popen(
-        ['docker', 'ps', '-q', '-f', 'name=openeats_db_1'],
+        ['docker', 'ps', '-q', '-f', 'name=ownrecipes_db_1'],
         stdin=PIPE,
         stdout=PIPE,
         stderr=PIPE
     )
     output, err = p.communicate(b"input data that is passed to subprocess' stdin")
     if output and not err:
-        print("Taking a database backup (saving as openeats.sql)...")
+        print("Taking a database backup (saving as ownrecipes.sql)...")
         call(
-            'docker exec openeats_db_1 sh -c ' +
-            '\'exec mysqldump openeats -uroot -p"$MYSQL_ROOT_PASSWORD"\'' +
-            ' > openeats.sql',
+            'docker exec ownrecipes_db_1 sh -c ' +
+            '\'exec mysqldump ownrecipes -u root -p"$MYSQL_ROOT_PASSWORD"\'' +
+            ' > ownrecipes.sql',
             shell=True
         )
     elif 'MYSQL_HOST' in open('env_prod.list').read():
@@ -80,7 +80,7 @@ def start_containers():
     # If it is then take a backup of the Recipe images folder.
     # The backup folder is called `site-media`.
     p = Popen(
-        ['docker', 'ps', '-q', '-f', 'name=openeats_api_1'],
+        ['docker', 'ps', '-q', '-f', 'name=ownrecipes_api_1'],
         stdin=PIPE,
         stdout=PIPE,
         stderr=PIPE
@@ -89,7 +89,7 @@ def start_containers():
     if output and not err:
         print("Taking a image backup save to 'site-media'...")
         call(
-            'docker cp openeats_api_1:/code/site-media/ ' + getcwd(),
+            'docker cp ownrecipes_api_1:/code/site-media/ ' + getcwd(),
             shell=True
         )
 
@@ -132,15 +132,15 @@ def start_containers():
 if __name__ == '__main__':
     import argparse
     parser = argparse.ArgumentParser(
-        description='OpenEats quick setup script. '
-                    'This script will restart your OpenEats server and '
+        description='OwnRecipes quick setup script. '
+                    'This script will restart your OwnRecipes server and '
                     'take a database and recipe image backup.'
     )
     parser.add_argument(
         '-t',
         '--tag',
         type=str,
-        help='The git tag of OpenEats you want to run. '
+        help='The git tag of OwnRecipes you want to run. '
              'If not included, then the master branch will be used.'
     )
     args = parser.parse_args()

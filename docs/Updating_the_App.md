@@ -2,7 +2,7 @@
 
 First pull the latest from this repo:
 ```bash
-cd OpenEats
+cd OwnRecipes
 git pull
 ```
 
@@ -30,6 +30,6 @@ The quick start script will do a few things.
 1. Creates a `docker-prod.version.yml` file with the required image tags.
 2. Downloads the required images.
 3. Takes a backup of the database and your images.
-4. Restarts the OpenEats servers.
+4. Restarts the OwnRecipes servers.
 
 Enjoy!

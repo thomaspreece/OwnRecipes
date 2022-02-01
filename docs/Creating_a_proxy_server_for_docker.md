@@ -2,7 +2,7 @@
 By default the docker application doesn't come with an https server. It is also likely that you want to serve other applications from your server.
 If you want to serve the docker application via https or serve multiple applications via nginx/apache then you will also need a proxy server.
 
-To change the port from which OpenEats is served you will need to update the left side of the port configuration in the `docker-prod.override.yml` file.
+To change the port from which OwnRecipes is served you will need to update the left side of the port configuration in the `docker-prod.override.yml` file.
 - Open the docker-prod.override.yml (your docker-compose configuration) file.
 - To serve the app via port 7000:
 ``` yml
@@ -13,7 +13,7 @@ services:
       - "7000:80"
 ```
 
-- Restart your docker containers 
+- Restart your docker containers
 
   - `docker-compose -f docker-prod.yml -f docker-prod.override.yml -f docker-prod.version.yml restart`
   - OR
