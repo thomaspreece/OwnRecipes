@@ -74,11 +74,10 @@ Example:
 
 ## Create Directory Infrastructure
 
-*It is recommended to stick to the path "/opt/ownrecipes(/ownrecipes-api)" to minimize the required changes in the configuration files.*
+*It is recommended to stick to the path "/opt/ownrecipes/ownrecipes-api" to minimize the required changes in the configuration files.*
 
 ```
 mkdir /opt/ownrecipes/
-mkdir /opt/ownrecipes/ownrecipes-apache2/
 ```
 
 ## Set up the ownrecipes-api
@@ -91,10 +90,6 @@ mkdir /opt/ownrecipes/ownrecipes-apache2/
 git clone https://github.com/ownrecipes/ownrecipes-api.git
 cd /opt/ownrecipes/ownrecipes-api
 ```
-
-### Install the Python Requirements
-
-`pip3 install -U -r /opt/ownrecipes/ownrecipes-api/base/requirements.txt`
 
 ### Create .env Environment File
 
@@ -118,52 +113,6 @@ Open the file `/opt/ownrecipes/ownrecipes-api/.env` and change the [variables](d
 
 `cp /opt/ownrecipes/ownrecipes-api/samples/no_docker/prod-entrypoint.sh /opt/ownrecipes/ownrecipes-api/base/`
 
-### Edit the /opt/ownrecipes/ownrecipes-api/base/settings.py file
-
-Find:
-
-```
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.environ.get('MYSQL_DATABASE', 'ownrecipes'),
-        'USER': os.environ.get('MYSQL_USER', 'username'),
-        'PASSWORD': os.environ.get('MYSQL_ROOT_PASSWORD', 'password'),
-        'HOST': os.environ.get('MYSQL_HOST', 'db'),
-        'PORT': os.environ.get('MYSQL_PORT', '3306'),
-        'OPTIONS': {
-            'charset': 'utf8mb4'
-        },
-        'TEST': {
-            'NAME': os.environ.get('MYSQL_TEST_DATABASE', 'test_ownrecipes')
-        }
-    }
-}
-```
-
-Edit this to include the same options you set in your `.env`.
-
-Example:
-
-```
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.environ.get('MYSQL_DATABASE', 'ownrecipes'),
-        'USER': os.environ.get('MYSQL_USER', 'ownrecipes'),
-        'PASSWORD': os.environ.get('MYSQL_ROOT_PASSWORD', 'db-trustNo1'),
-        'HOST': os.environ.get('MYSQL_HOST', 'db'),
-        'PORT': os.environ.get('MYSQL_PORT', '3306'),
-        'OPTIONS': {
-            'charset': 'utf8mb4'
-        },
-        'TEST': {
-            'NAME': os.environ.get('MYSQL_TEST_DATABASE', 'test_ownrecipes')
-        }
-    }
-}
-```
-
 ### Copy the /opt/ownrecipes/ownrecipes-api/base/gunicorn_start.sh file
 
 *If you are using a different directory than "/opt/ownrecipes", or can't use the os user "ownrecipes", then you have to adjust the file to your needs.*
@@ -176,28 +125,53 @@ DATABASES = {
 
 `cp /opt/ownrecipes/ownrecipes-api/samples/no_docker/ownrecipes.service /lib/systemd/system/`
 
-### Populate the database
-
-*This step is optional.*
-
-```
-cd /opt/ownrecipes/ownrecipes-api
-python manage.py makemigrations
-python manage.py migrate
-python manage.py createsuperuser
-
-python manage.py loaddata course_data.json
-python manage.py loaddata cuisine_data.json
-python manage.py loaddata news_data.json
-python manage.py loaddata recipe_data.json
-python manage.py loaddata ing_data.json
-```
-
 ### Create the OS user
 
 ```
 sudo useradd -m -d /opt/ownrecipes username
 sudo chown -R username:groupname /opt/ownrecipes
+```
+
+Example:
+
+```
+sudo useradd -m -d /opt/ownrecipes ownrecipes
+sudo chown -R ownrecipes:ownrecipes /opt/ownrecipes
+```
+
+### Install the Python Requirements
+
+First, change user to the OS user for ownrecipes
+
+```
+su ownrecipes
+```
+
+```
+pip3 install -U -r /opt/ownrecipes/ownrecipes-api/base/requirements.txt
+```
+
+### Populate the database
+
+*This step is optional.*
+
+First, change user to the OS user for ownrecipes
+
+```
+su ownrecipes
+```
+
+```
+cd /opt/ownrecipes/ownrecipes-api
+python3 manage.py makemigrations
+python3 manage.py migrate
+python3 manage.py createsuperuser
+
+python3 manage.py loaddata course_data.json
+python3 manage.py loaddata cuisine_data.json
+python3 manage.py loaddata news_data.json
+python3 manage.py loaddata recipe_data.json
+python3 manage.py loaddata ing_data.json
 ```
 
 ### Start the api
@@ -253,13 +227,12 @@ This will create the build directory as `/opt/ownrecipes/ownrecipes-web/build`
 
 **Info: If you prefer nginx, stick to the second option below and skip this step.**
 
-**Info: The docker version uses nginx.**
-
 `apt-get install apache2`
 
 ### Create symbolic links for Apache2
 
 ```
+mkdir /opt/ownrecipes/ownrecipes-apache2/
 cd /opt/ownrecipes/ownrecipes-apache2/
 ln -s /opt/ownrecipes/ownrecipes-web/build /opt/ownrecipes/ownrecipes-apache2/public-ui
 ln -s /opt/ownrecipes/ownrecipes-api/static-files /opt/ownrecipes/ownrecipes-apache2/static-files
