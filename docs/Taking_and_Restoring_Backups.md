@@ -1,5 +1,7 @@
 # Backing up Your Data
 
+## Docker
+
 The following commands can be used to take backups of your data and restore those backups. The backup commands are automatically run when you upgrade to a newer version as well.
 
 ### Recipes Images
@@ -27,7 +29,7 @@ docker cp /dir/on/local/system/site-media/. ownrecipes_api_1:/code/site-media/
 Places a sql dump of the database on your current working directory.
 
 ```sh
-docker exec ownrecipes_db_1 sh -c 'exec mysqldump ownrecipes -u root -p "$MYSQL_ROOT_PASSWORD"' > ownrecipes.sql
+docker exec ownrecipes_db_1 sh -c 'exec mysqldump ownrecipes -u root -p"$MYSQL_ROOT_PASSWORD"' > ownrecipes.sql
 ```
 
 #### Restoring:
@@ -38,9 +40,50 @@ Note: if you changed the database name then you will need to change the last wor
 ```sh
 cd /open/eats/root/
 source env_prod.list
-cat ownrecipes.sql | docker exec -i ownrecipes_db_1 /usr/bin/mysql -u root -p "$MYSQL_ROOT_PASSWORD" ownrecipes
+cat ownrecipes.sql | docker exec -i ownrecipes_db_1 /usr/bin/mysql -u root -p"$MYSQL_ROOT_PASSWORD" ownrecipes
 ```
 
 ### Sources
 - [Copying Image Files to and from Docker Containers/Volumes](https://gist.github.com/spalladino/6d981f7b33f6e0afe6bb)
 - [DB backups/restores](https://stackoverflow.com/questions/22907231/copying-files-from-host-to-docker-container)
+
+
+## Without docker
+
+### Recipes Images
+
+#### Backing up:
+
+Replace `/dir/on/local/system/` with the location where you would like your images.
+
+```sh
+cp /opt/openeats/openeats-api/site-media /dir/on/local/system/
+```
+
+#### Restoring:
+
+Replace `/dir/on/local/system/` with the location where you would like your images.
+
+```sh
+cp /dir/on/local/system/site-media/. /opt/openeats/openeats-api/site-media/
+```
+
+### Database
+
+#### Backing up:
+
+Places a sql dump of the database on your current working directory.
+
+```sh
+cd /opt/ownrecipes/ownrecipes-api
+. ./.env
+mysqldump $MYSQL_DATABASE -u $MYSQL_USER -p"$MYSQL_ROOT_PASSWORD" > ownrecipes.sql
+```
+
+#### Restoring:
+
+```sh
+cd /opt/ownrecipes/ownrecipes-api
+. ./.env
+sudo mysql ownrecipes -u $MYSQL_USER -p"$MYSQL_ROOT_PASSWORD" < /path/to/your/ownrecipes.sql
+```

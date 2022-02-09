@@ -2,7 +2,7 @@
 
 ## Install Dependencies
 
-`apt-get install python3 python3-pip git build-essential`
+`sudo apt-get install python3 python3-pip git build-essential`
 
 ## Nodejs
 
@@ -14,7 +14,7 @@ curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -
 To ensure you get the up-to-date version of node, you'll need to make a modification to your apt-cache policy.
 
 ```
-nano /etc/apt/preferences.d/nodesource
+sudo nano /etc/apt/preferences.d/nodesource
 ```
 Insert the following:
 
@@ -34,19 +34,19 @@ We will use MariaDB.
 ### Install MariaDB
 
 ```
-apt install mariadb-server
+sudo apt install mariadb-server
 ```
-Don't forget to run `mysql_secure_installation`!
+Don't forget to run `sudo mysql_secure_installation`!
 
 ### Install Additional Dependencies
 
-`apt install default-libmysqlclient-dev libssl-dev`
+`sudo apt install default-libmysqlclient-dev libssl-dev`
 
 ### Create OwnRecipes User and Database in MariaDB (ssh)
 
 #### Log Into Your MySQL Database
 
-`mysql`
+`sudo mysql`
 
 #### Create Database
 
@@ -144,7 +144,7 @@ sudo chown -R ownrecipes:ownrecipes /opt/ownrecipes
 First, change user to the OS user for ownrecipes
 
 ```
-su ownrecipes
+sudo su ownrecipes
 ```
 
 ```
@@ -158,7 +158,7 @@ pip3 install -U -r /opt/ownrecipes/ownrecipes-api/base/requirements.txt
 First, change user to the OS user for ownrecipes
 
 ```
-su ownrecipes
+sudo su ownrecipes
 ```
 
 ```
@@ -176,11 +176,14 @@ python3 manage.py loaddata ing_data.json
 
 ### Start the api
 
-`systemctl start ownrecipes.service`
+`sudo service ownrecipes start`
 
 ### Check if the api running correctly
 
-`systemctl status ownrecipes.service`
+`sudo service ownrecipes status`
+
+If all is running correctly, you should see the line `Active: active (running)`.
+
 
 ## Set up the ownrecipes-web
 
@@ -206,6 +209,8 @@ Our api will still listen on port **5210**
 ```
 # url to your backend
 export REACT_APP_API_URL=https://ownrecipes.domain.com:5210
+# url to the django admin site
+export REACT_APP_ADMIN_URL=https://ownrecipes.domain.com:5210/admin
 # default language to use
 export REACT_APP_LOCALE=en
 ```
@@ -227,7 +232,7 @@ This will create the build directory as `/opt/ownrecipes/ownrecipes-web/build`
 
 **Info: If you prefer nginx, stick to the second option below and skip this step.**
 
-`apt-get install apache2`
+`sudo apt-get install apache2`
 
 ### Create symbolic links for Apache2
 
@@ -254,7 +259,7 @@ ln -s /opt/ownrecipes/ownrecipes-api/site-media /opt/ownrecipes/ownrecipes-apach
            # HANDLE 404 ERROR ON REFRESH
            RewriteEngine On
            RewriteBase /
-           RewriteRule ^index\.html$ - [L]
+           RewriteRulesystemctl ^index\.html$ - [L]
            RewriteCond %{REQUEST_FILENAME} !-f
            RewriteCond %{REQUEST_FILENAME} !-d
            RewriteRule . /index.html [L]
@@ -346,6 +351,6 @@ git clone https://github.com/ownrecipes/ownrecipes-web.git
 ### Restart services
 
 ```
-systemctl restart ownrecipes.service
-systemctl reload apache2.service
+sudo service ownrecipes restart
+sudo service apache2 reload
 ```
