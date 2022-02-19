@@ -1,5 +1,9 @@
 # OwnRecipes Project
 
+:warning: THIS PROJECT IS UNDER ACTIVE DEVELOPMENT AND IS NOT PRODUCTION READY, YET. :warning:
+
+<hr />
+
 OwnRecipes is a recipe management site that allows users to create, share, and store their personal collection of recipes
 
 This project was forked from OpenEats. See [the homepage](https://github.com/open-eats/OpenEats) for more information about OpenEats!
