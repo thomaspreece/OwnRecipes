@@ -259,7 +259,14 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RecipeIterator"
+                }
+              }
+            }
           },
           "400": {
             "description": "Bad Request"
@@ -267,15 +274,6 @@
         },
         "operationId": "get-recipe-mini-browse",
         "description": "Returns randomly some recipes",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/RecipeIterator"
-              }
-            }
-          }
-        },
         "parameters": [
           {
             "schema": {
@@ -331,6 +329,51 @@
         "operationId": "get-recipe-by-slug",
         "description": "Get Recipe by slug."
       }
+    },
+    "/recipe_groups/course-count": {
+      "get": {
+        "summary": "Get Course Count",
+        "tags": [
+          "Recipe"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CategoryIterator"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-course-count",
+        "description": "Return for each course the number of associated recipes."
+      }
+    },
+    "/recipe_groups/cuisine-count": {
+      "get": {
+        "summary": "Get Cuisinje Count",
+        "tags": [
+          "Recipe"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CategoryIterator"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-cuisine-count",
+        "description": "Return for each cuisine the number of associated recipes."
+      },
+      "parameters": []
     },
     "/rating/rating": {
       "get": {
@@ -404,6 +447,29 @@
         }
       }
     },
+    "/rating/rating-count": {
+      "get": {
+        "summary": "Get Cuisinje Count",
+        "tags": [
+          "Recipe"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CategoryIterator"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-cuisine-count",
+        "description": "Return for each cuisine the number of associated recipes."
+      },
+      "parameters": []
+    },
     "/rating/rating/{ratingId}": {
       "parameters": [
         {
@@ -443,6 +509,171 @@
   },
   "components": {
     "schemas": {
+      "CategoryCount": {
+        "title": "CategoryCount",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "readOnly": true
+          },
+          "total": {
+            "type": "number",
+            "description": "How many recipes belong to this category.",
+            "readOnly": true
+          },
+          "title": {
+            "type": "string",
+            "example": "Entry"
+          },
+          "slug": {
+            "type": "string",
+            "example": "entry",
+            "readOnly": true
+          },
+          "author": {
+            "type": "number",
+            "readOnly": true
+          }
+        },
+        "required": [
+          "id",
+          "total",
+          "title",
+          "slug",
+          "author"
+        ]
+      },
+      "CategoryIterator": {
+        "title": "NewsIterator",
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "number"
+          },
+          "next": {
+            "type": "number",
+            "nullable": true
+          },
+          "previous": {
+            "type": "number",
+            "nullable": true
+          },
+          "results": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CategoryCount"
+            }
+          }
+        },
+        "required": [
+          "count",
+          "next",
+          "previous",
+          "results"
+        ]
+      },
+      "Course": {
+        "title": "Course",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "readOnly": true
+          },
+          "title": {
+            "type": "string",
+            "description": "Appetizer, Breakfast, Dessert, Entry"
+          }
+        },
+        "required": [
+          "id",
+          "title"
+        ]
+      },
+      "Cuisine": {
+        "title": "Cuisine",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "readOnly": true
+          },
+          "title": {
+            "type": "string",
+            "description": "American, Chinese, French, Indian, Italian, Japanese, Korean, Mexican, Thai"
+          }
+        },
+        "required": [
+          "id",
+          "title"
+        ]
+      },
+      "ErrorDto": {
+        "title": "ErrorDto",
+        "type": "object",
+        "properties": {
+          "non_field_errors": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "Ingredient": {
+        "title": "Ingredient",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "readOnly": true
+          },
+          "numerator": {
+            "type": "number"
+          },
+          "denominator": {
+            "type": "number"
+          },
+          "measurement": {
+            "type": "string",
+            "description": "pound, dash, can, cans, tablespoon, tablespoons, whole"
+          },
+          "title": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "numerator",
+          "denominator",
+          "title"
+        ]
+      },
+      "IngredientGroup": {
+        "title": "IngredientGroup",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "readOnly": true
+          },
+          "title": {
+            "type": "string"
+          },
+          "ingredients": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Ingredient"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "title",
+          "ingredients"
+        ]
+      },
       "LoginRequest": {
         "title": "LoginRequest",
         "type": "object",
@@ -477,18 +708,6 @@
           "id",
           "token"
         ]
-      },
-      "ErrorDto": {
-        "title": "ErrorDto",
-        "type": "object",
-        "properties": {
-          "non_field_errors": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          }
-        }
       },
       "NewsIterator": {
         "title": "NewsIterator",
@@ -574,243 +793,24 @@
           "frontpage"
         ]
       },
-      "RecipeIterator": {
-        "title": "RecipeIterator",
+      "RatingCount": {
+        "title": "RatingCount",
         "type": "object",
+        "description": "",
         "properties": {
-          "count": {
-            "type": "number"
-          },
-          "next": {
-            "type": "number",
-            "nullable": true
-          },
-          "previous": {
-            "type": "number",
-            "nullable": true
-          },
-          "results": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/RecipeResponse"
-            }
-          }
-        },
-        "required": [
-          "count",
-          "next",
-          "previous",
-          "results"
-        ]
-      },
-      "RecipeResponse": {
-        "title": "RecipeResponse",
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "number",
-            "readOnly": true
-          },
-          "slug": {
-            "type": "string",
-            "example": "tasty-chili-1"
-          },
-          "title": {
-            "type": "string",
-            "example": "Tasty Chili"
-          },
-          "photo": {
-            "type": "string"
-          },
-          "photo_thumbnail": {
-            "type": "string"
-          },
-          "info": {
-            "type": "string"
-          },
           "rating": {
             "type": "number",
-            "minimum": 0,
-            "maximum": 5,
-            "description": "Zero means no rating."
-          },
-          "tags": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "course": {
-            "$ref": "#/components/schemas/Course"
-          },
-          "cuisine": {
-            "$ref": "#/components/schemas/Cuisine"
-          },
-          "ingredient_groups": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/IngredientGroup"
-            }
-          },
-          "servings": {
-            "type": "number",
-            "minimum": 0,
-            "description": "Zero means no information given."
-          },
-          "directions": {
-            "type": "string"
-          },
-          "prep_time": {
-            "type": "number",
-            "minimum": 0,
-            "description": "Zero means no prep_time needed."
-          },
-          "cook_time": {
-            "type": "number",
-            "minimum": 0,
-            "description": "Zero means no cook_time needed."
-          },
-          "subrecipes": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/RecipeResponse"
-            }
-          },
-          "author": {
-            "type": "number",
-            "description": "author user id",
             "readOnly": true
           },
-          "username": {
-            "type": "string",
-            "description": "Author username"
-          },
-          "pub_date": {
-            "type": "string",
-            "example": "2011-05-20",
-            "description": "ISO8601 date"
-          },
-          "update_date": {
-            "type": "string",
-            "example": "2011-05-20",
-            "description": "ISO8601 date"
-          },
-          "source": {
-            "type": "string"
-          },
-          "public": {
-            "type": "boolean",
-            "description": "If other may access this recipe."
+          "total": {
+            "type": "number",
+            "description": "How many recipes have this rating.",
+            "readOnly": true
           }
         },
         "required": [
-          "id",
-          "slug",
-          "title",
-          "info",
           "rating",
-          "tags",
-          "ingredient_groups",
-          "servings",
-          "directions",
-          "prep_time",
-          "cook_time",
-          "subrecipes",
-          "author",
-          "username",
-          "pub_date",
-          "update_date",
-          "source",
-          "public"
-        ]
-      },
-      "IngredientGroup": {
-        "title": "IngredientGroup",
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "number",
-            "readOnly": true
-          },
-          "title": {
-            "type": "string"
-          },
-          "ingredients": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Ingredient"
-            }
-          }
-        },
-        "required": [
-          "id",
-          "title",
-          "ingredients"
-        ]
-      },
-      "Ingredient": {
-        "title": "Ingredient",
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "number",
-            "readOnly": true
-          },
-          "numerator": {
-            "type": "number"
-          },
-          "denominator": {
-            "type": "number"
-          },
-          "measurement": {
-            "type": "string",
-            "description": "pound, dash, can, cans, tablespoon, tablespoons, whole"
-          },
-          "title": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "id",
-          "numerator",
-          "denominator",
-          "title"
-        ]
-      },
-      "Course": {
-        "title": "Course",
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "number",
-            "readOnly": true
-          },
-          "title": {
-            "type": "string",
-            "description": "Appetizer, Breakfast, Dessert, Entry"
-          }
-        },
-        "required": [
-          "id",
-          "title"
-        ]
-      },
-      "Cuisine": {
-        "title": "Cuisine",
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "number",
-            "readOnly": true
-          },
-          "title": {
-            "type": "string",
-            "description": "American, Chinese, French, Indian, Italian, Japanese, Korean, Mexican, Thai"
-          }
-        },
-        "required": [
-          "id",
-          "title"
+          "total"
         ]
       },
       "RatingIterator": {
@@ -917,6 +917,240 @@
           "user_id",
           "username",
           "author"
+        ]
+      },
+      "RecipeIterator": {
+        "title": "RecipeIterator",
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "number"
+          },
+          "next": {
+            "type": "number",
+            "nullable": true
+          },
+          "previous": {
+            "type": "number",
+            "nullable": true
+          },
+          "results": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RecipeList"
+            }
+          }
+        },
+        "required": [
+          "count",
+          "next",
+          "previous",
+          "results"
+        ]
+      },
+      "RecipeList": {
+        "title": "RecipeList",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "readOnly": true
+          },
+          "slug": {
+            "type": "string",
+            "example": "tasty-chili-1"
+          },
+          "title": {
+            "type": "string",
+            "maxLength": 250,
+            "example": "Tasty Chili"
+          },
+          "pub_date": {
+            "type": "string",
+            "example": "2011-05-20",
+            "description": "ISO8601 date"
+          },
+          "rating": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 5,
+            "description": "Zero means no rating."
+          },
+          "photo_thumbnail": {
+            "type": "string"
+          },
+          "info": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "slug",
+          "title",
+          "pub_date",
+          "rating",
+          "info"
+        ]
+      },
+      "RecipeResponse": {
+        "title": "RecipeResponse",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "readOnly": true
+          },
+          "slug": {
+            "type": "string",
+            "example": "tasty-chili-1"
+          },
+          "title": {
+            "type": "string",
+            "example": "Tasty Chili",
+            "maxLength": 250
+          },
+          "photo": {
+            "type": "string"
+          },
+          "photo_thumbnail": {
+            "type": "string"
+          },
+          "info": {
+            "type": "string"
+          },
+          "rating": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 5,
+            "description": "Zero means no rating."
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "course": {
+            "$ref": "#/components/schemas/Course"
+          },
+          "cuisine": {
+            "$ref": "#/components/schemas/Cuisine"
+          },
+          "ingredient_groups": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IngredientGroup"
+            }
+          },
+          "servings": {
+            "type": "number",
+            "minimum": 0,
+            "description": "Zero means no information given."
+          },
+          "directions": {
+            "type": "string"
+          },
+          "prep_time": {
+            "type": "number",
+            "minimum": 0,
+            "description": "Zero means no prep_time needed."
+          },
+          "cook_time": {
+            "type": "number",
+            "minimum": 0,
+            "description": "Zero means no cook_time needed."
+          },
+          "subrecipes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SubRecipe"
+            }
+          },
+          "author": {
+            "type": "number",
+            "description": "author user id",
+            "readOnly": true
+          },
+          "username": {
+            "type": "string",
+            "description": "Author username"
+          },
+          "pub_date": {
+            "type": "string",
+            "example": "2011-05-20",
+            "description": "ISO8601 date"
+          },
+          "update_date": {
+            "type": "string",
+            "example": "2011-05-20",
+            "description": "ISO8601 date"
+          },
+          "source": {
+            "type": "string",
+            "maxLength": 200
+          },
+          "public": {
+            "type": "boolean",
+            "description": "If unauthorized visitors may view the recipe.",
+            "default": true
+          }
+        },
+        "required": [
+          "id",
+          "slug",
+          "title",
+          "info",
+          "rating",
+          "tags",
+          "course",
+          "cuisine",
+          "ingredient_groups",
+          "servings",
+          "directions",
+          "prep_time",
+          "cook_time",
+          "subrecipes",
+          "author",
+          "username",
+          "pub_date",
+          "update_date",
+          "source",
+          "public"
+        ]
+      },
+      "SubRecipe": {
+        "title": "SubRecipe",
+        "type": "object",
+        "x-tags": [
+          "Recipe"
+        ],
+        "properties": {
+          "id": {
+            "type": "number",
+            "readOnly": true
+          },
+          "numerator": {
+            "type": "number",
+            "default": 0
+          },
+          "denominator": {
+            "type": "number",
+            "default": 1
+          },
+          "measurement": {
+            "type": "string"
+          },
+          "child_recipe": {
+            "type": "number"
+          },
+          "parent_recipe": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "id",
+          "numerator",
+          "denominator"
         ]
       }
     },
