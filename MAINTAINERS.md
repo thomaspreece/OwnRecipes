@@ -12,3 +12,8 @@ Maintainers
 ===========
 
 - Frank \"Roy\" Hartung (sepulzera)
+
+Contact
+=======
+
+If you want to contact us in private, please find sufficient information in the [SECURITY.md](SECURITY.md).
