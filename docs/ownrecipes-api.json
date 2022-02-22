@@ -295,6 +295,75 @@
         ]
       }
     },
+    "/recipe/recipes": {
+      "get": {
+        "summary": "Get Recipes List",
+        "tags": [
+          "Recipe"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RecipeIterator"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        },
+        "operationId": "get-recipes",
+        "description": "Return list of simplified recipes data.",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "example": "id,slug,title,pub_date,rating,photo_thumbnail,info"
+            },
+            "in": "query",
+            "name": "fields",
+            "description": "Comma separated attribute values that should be returned from the recipe model",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "number",
+              "minLength": 1,
+              "example": 12
+            },
+            "in": "query",
+            "name": "limit",
+            "description": "How many recipes to return."
+          },
+          {
+            "schema": {
+              "type": "number",
+              "example": 24,
+              "minLength": 0
+            },
+            "in": "query",
+            "description": "Pagination offset.",
+            "name": "offset"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "-rating"
+            },
+            "in": "query",
+            "name": "ordering",
+            "description": "Fields to order by. Prefix with minus to order descending."
+          }
+        ]
+      }
+    },
     "/recipe/recipes/{slug}": {
       "parameters": [
         {
@@ -326,8 +395,32 @@
             "description": "Not Found"
           }
         },
-        "operationId": "get-recipe-by-slug",
+        "operationId": "get-recipe",
         "description": "Get Recipe by slug."
+      },
+      "delete": {
+        "summary": "Delete Recipe",
+        "operationId": "delete-recipe",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "tags": [
+          "Recipe"
+        ],
+        "description": "Deletes the recipe. Only the author and admin may use this.",
+        "security": [
+          {
+            "TokenAuth": []
+          }
+        ]
       }
     },
     "/recipe_groups/course-count": {
@@ -354,7 +447,7 @@
     },
     "/recipe_groups/cuisine-count": {
       "get": {
-        "summary": "Get Cuisinje Count",
+        "summary": "Get Cuisine Count",
         "tags": [
           "Recipe"
         ],
@@ -404,7 +497,7 @@
             "description": "Recipe Slug"
           }
         ],
-        "description": "Get Ratings for a recipe"
+        "description": "Get Ratings for a recipe."
       },
       "post": {
         "summary": "Create Rating",
@@ -449,24 +542,27 @@
     },
     "/rating/rating-count": {
       "get": {
-        "summary": "Get Cuisinje Count",
-        "tags": [
-          "Recipe"
-        ],
+        "summary": "Get Rating Count",
         "responses": {
           "200": {
             "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CategoryIterator"
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RatingCount"
+                  }
                 }
               }
             }
           }
         },
-        "operationId": "get-cuisine-count",
-        "description": "Return for each cuisine the number of associated recipes."
+        "operationId": "get-rating-count",
+        "description": "Return for each rating the number of associated recipes.",
+        "tags": [
+          "Rating"
+        ]
       },
       "parameters": []
     },
@@ -583,7 +679,8 @@
           },
           "title": {
             "type": "string",
-            "description": "Appetizer, Breakfast, Dessert, Entry"
+            "description": "Appetizer, Breakfast, Dessert, Entry",
+            "maxLength": 100
           }
         },
         "required": [
@@ -601,7 +698,8 @@
           },
           "title": {
             "type": "string",
-            "description": "American, Chinese, French, Indian, Italian, Japanese, Korean, Mexican, Thai"
+            "description": "American, Chinese, French, Indian, Italian, Japanese, Korean, Mexican, Thai",
+            "maxLength": 100
           }
         },
         "required": [
@@ -629,25 +727,32 @@
             "type": "number",
             "readOnly": true
           },
+          "title": {
+            "type": "string",
+            "maxLength": 250
+          },
           "numerator": {
-            "type": "number"
+            "type": "number",
+            "default": 0,
+            "format": "float"
           },
           "denominator": {
-            "type": "number"
+            "type": "number",
+            "format": "float",
+            "default": 1,
+            "minimum": 1
           },
           "measurement": {
             "type": "string",
-            "description": "pound, dash, can, cans, tablespoon, tablespoons, whole"
-          },
-          "title": {
-            "type": "string"
+            "description": "pound, dash, can, cans, tablespoon, tablespoons, whole",
+            "maxLength": 200
           }
         },
         "required": [
           "id",
+          "title",
           "numerator",
-          "denominator",
-          "title"
+          "denominator"
         ]
       },
       "IngredientGroup": {
@@ -659,7 +764,8 @@
             "readOnly": true
           },
           "title": {
-            "type": "string"
+            "type": "string",
+            "maxLength": 150
           },
           "ingredients": {
             "type": "array",
@@ -886,7 +992,8 @@
             "maximum": 5
           },
           "comment": {
-            "type": "string"
+            "type": "string",
+            "maxLength": 250
           },
           "recipe": {
             "type": "string",
@@ -936,6 +1043,7 @@
           },
           "results": {
             "type": "array",
+            "description": "This is just an example. It depends on the queried fields.",
             "items": {
               "$ref": "#/components/schemas/RecipeList"
             }
@@ -989,6 +1097,7 @@
           "title",
           "pub_date",
           "rating",
+          "photo_thumbnail",
           "info"
         ]
       },
@@ -1027,7 +1136,7 @@
           "tags": {
             "type": "array",
             "items": {
-              "type": "string"
+              "$ref": "#/components/schemas/Tag"
             }
           },
           "course": {
@@ -1151,6 +1260,29 @@
           "id",
           "numerator",
           "denominator"
+        ]
+      },
+      "Tag": {
+        "title": "Tag",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "readOnly": true
+          },
+          "title": {
+            "type": "string",
+            "maxLength": 100
+          },
+          "slug": {
+            "type": "string",
+            "readOnly": true
+          }
+        },
+        "required": [
+          "id",
+          "title",
+          "slug"
         ]
       }
     },
