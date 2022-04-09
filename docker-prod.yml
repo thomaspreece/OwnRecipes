@@ -1,5 +1,15 @@
-version: '2.3'
+version: '3.1'
 services:
+  db:
+    image: mariadb:10.7.3
+    volumes:
+      - database:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 20
+    env_file:
+      ownrecipes-api/.env.production
   api:
     image: ownrecipes/ownrecipes-api
     command: /startup/prod-entrypoint.sh
@@ -11,26 +21,13 @@ services:
       db:
         condition: service_healthy
     env_file:
-      env_prod.list
+      ownrecipes-api/.env.production
   web:
     image: ownrecipes/ownrecipes-web
-    command: yarn start
-    depends_on:
-      - api
     volumes:
       - public-ui:/code/build
     env_file:
-      env_prod.list
-  db:
-    image: mariadb:5.5.64
-    volumes:
-      - database:/var/lib/mysql
-    healthcheck:
-      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
-      timeout: 20s
-      retries: 20
-    env_file:
-      env_prod.list
+      ownrecipes-web/.env.production
   nginx:
     image: ownrecipes/ownrecipes-nginx
     command: ./start.sh
@@ -42,7 +39,7 @@ services:
       - api
       - web
     env_file:
-      env_prod.list
+      ownrecipes-api/.env.production
 volumes:
   database:
   public-ui:

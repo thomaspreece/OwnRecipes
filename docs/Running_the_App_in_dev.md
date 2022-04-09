@@ -1,35 +1,45 @@
-# Running the App
+## Running the app with docker for development
 
-The recommended way to run this app is with docker. You can install docker [here](https://www.docker.com/community-edition#/download) and docker-compose [here](https://docs.docker.com/compose/install/#prerequisites). If you are not familiar with docker you can read more about it on [their website](https://www.docker.com/what-docker).
+## Install Prerequisites
 
-### Running the app with docker for development
+Install [docker and docker-compose](Install_Prerequisites.md/#docker).
+Install [git](Install_Prerequisites.md/#git).
 
-First you'll need to fork the appropriate repo that you are looking to make changes to, alone witht he core repo. See below for a sample.
+## Setup OwnRecipes
 
+First clone the repos:
 ```bash
 git clone https://github.com/ownrecipes/OwnRecipes.git
 cd OwnRecipes
 
 git clone https://github.com/ownrecipes/ownrecipes-api.git
 git clone https://github.com/ownrecipes/ownrecipes-web.git
-
-docker-compose build
-docker-compose up
 ```
 
-### First Time Setup
+Then run it:
+```bash
+# cd back into OwnRecipes
+cd ..
 
-Regardless of if your running the app in production or development, you need to seed the database.
+sudo docker-compose --profile all build
+sudo docker-compose --profile all up
+```
+
+## First Time Setup
+
+Seed the database.
 
 To create a super user:
 ``` bash
-docker-compose -f docker-prod.yml run --rm --entrypoint 'python manage.py createsuperuser' api
+sudo docker-compose run --rm --entrypoint 'python manage.py makemigrations' api
+sudo docker-compose run --rm --entrypoint 'python manage.py migrate' api
+sudo docker-compose run --rm --entrypoint 'python manage.py createsuperuser' api
 ```
 Follow the prompts given to create your user. You can do this as many times as you like.
 
 If you want to add some test data you can load a few recipes and some news data. This data isn't really needed unless you just wanna see how the app looks and if its working.
 ```bash
-docker-compose -f docker-prod.yml run --rm --entrypoint 'sh' api
+sudo docker-compose run --rm --entrypoint 'sh' api
 ./manage.py loaddata course_data.json
 ./manage.py loaddata cuisine_data.json
 ./manage.py loaddata news_data.json

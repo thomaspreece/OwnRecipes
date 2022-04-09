@@ -1,37 +1,37 @@
-version: '2.3'
+version: '3.1'
 services:
-  api:
-    build: ownrecipes-api/
-    command: python manage.py runserver 0.0.0.0:8000
-    env_file:
-      env_dev.list
+  db:
+    image: mariadb:10.7.3
     volumes:
-      - ./ownrecipes-api:/code
+      - database:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    env_file:
+      ownrecipes-api/.env.development
+  api:
+    build: ./ownrecipes-api/
+    command: python manage.py runserver 0.0.0.0:5210
+    volumes:
+      - ./ownrecipes-api/v1:/code/v1
       - static-files:/code/static-files
       - site-media:/code/site-media
     depends_on:
       - db
     ports:
-      - "8000:8000"
-  web:
-    build: ownrecipes-web/
-    command: yarn dev
+      - "5210:5210"
     env_file:
-      env_dev.list
+      ownrecipes-api/.env.development
+  web:
+    build: ./ownrecipes-web/
+    command: npm start
     volumes:
-      - ./ownrecipes-web:/code
-    depends_on:
-      - api
+      - ./ownrecipes-web/src:/code/src
+      - ./ownrecipes-web/node_modules:/code/node_modules
+    profiles: ["all"]
     ports:
       - "8080:8080"
-  db:
-    image: mariadb
     env_file:
-      env_dev.list
-    volumes:
-      - database:/var/lib/mysql
-    ports:
-      - "3306:3306"
+      ownrecipes-web/.env.development
 volumes:
   database:
   static-files:

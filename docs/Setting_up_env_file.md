@@ -1,6 +1,6 @@
 ## Configuing your Environment
 
-This file will provide some context on the env file.
+This file will provide some context on the env settings.
 
 
 ## Database config
@@ -33,7 +33,10 @@ The port the database is exposed on.
 EX: `MYSQL_PORT=3306`
 
 
-## Django config
+## API / Django config
+
+The following environment variables can be applied the ownrecipes-api/.env files.
+
 #### API_URL
 This URL and port combination is used by gunicorn to serve the API.
 For docker instances we need to serve via `0.0.0.0`.
@@ -42,12 +45,12 @@ If a host has two IP addresses, 192.168.1.1 and 10.1.2.1,
 and a server running on the host listens on 0.0.0.0,
 it will be reachable at both of those IPs.
 
-EX: `API_URL=0.0.0.0:8000`
+EX: `API_URL=0.0.0.0:5210`
 
 #### API_PORT
 The port the API is served from.
 
-EX: `API_PORT=8000`
+EX: `API_PORT=5210`
 
 #### DJANGO_SECRET_KEY
 A secret key for a particular Django installation.
@@ -76,6 +79,12 @@ For more information, see: https://docs.djangoproject.com/en/1.11/ref/settings/#
 
 EX: `ALLOWED_HOST=ryannoelk.com`
 
+#### NODE_URL
+The URL and port node is served from.
+The API will use this to prevent CORS issues.
+
+EX: `NODE_URL=localhost:8080`
+
 #### HTTP_X_FORWARDED_PROTO
 If you are serving content behind an HTTPS proxy.
 Set this to `True`, otherwise `False`.
@@ -86,32 +95,26 @@ For more information, see: https://docs.djangoproject.com/en/1.10/ref/settings/#
 EX: `HTTP_X_FORWARDED_PROTO=False`
 
 
-## Node config
+## Web config
 
-#### NODE_ENV=production
-This tells node whether to build a production or dev version of the bundle.
+The following environment variables can be applied the ownrecipes-web/.env files.
 
-EX: `NODE_ENV=production`
-
-#### NODE_URL
-The URL and port node is served from.
-The API will use this to prevent CORS issues.
-
-EX: `NODE_URL=localhost:8080`
-
-#### NODE_API_URL
-The hostname/port (my.example.com:8080) the frontend will call the API from.
+#### REACT_APP_API_URL
+The hostname/port (my.example.com:5210) the frontend will call the API from.
 If unset, the UI will call the API from the same hostname/port. If you are not using the default Nginx server that OwnRecipes comes with, you will either need to set this or configure your own proxy server to redirect all traffic that starts with `/api` or `/admin`.
 
-EX: `NODE_API_URL=http://localhost:8080`, `NODE_API_URL=https://api.example.com`
+EX: `REACT_APP_API_URL=http://localhost:5210`, `REACT_APP_API_URL=https://api.example.com`
 
-#### NODE_LOCALE
+### REACT_APP_ADMIN_URL
+If you have set up a different url for the DJANGO admin page, then you will have to set this variable accordingly.
+
+EX: `REACT_APP_API_URL=http://localhost:5210/some-admin-path`, `REACT_APP_API_URL=https://admin.api.example.com`
+
+#### REACT_APP_LOCALE
 The language the UI will be in.
 
 Options:
 - English: en
 - German: de
-- Spanish: es
-- French: fr
 
-EX: `NODE_LOCALE=en`
+EX: `NODE_LOCALE=de`

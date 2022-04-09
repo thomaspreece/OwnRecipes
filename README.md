@@ -4,7 +4,7 @@
 
 <hr />
 
-OwnRecipes is a recipe management site that allows users to create, share, and store their personal collection of recipes
+OwnRecipes is a recipe management site that allows users to create, share, and store their personal collection of recipes.
 
 This project was forked from OpenEats. See [the homepage](https://github.com/open-eats/OpenEats) for more information about OpenEats!
 
@@ -18,14 +18,24 @@ The usage for the app is intended for a single user or a small group. For my per
 - Quickly print recipe.
 - Linking recipes and ingredient grouping.
 
-## [Read the docs on getting started here!](docs/Running_the_App_Without_Docker.md)
+## Install
 
-**Please note that OwnRecipes docker-functionality is neither tested nor being actively used. Main reasons are that OpenEats' wasn't working for me and that I do not care about it.**
+### Install via docker
 
-Anyway, if you wish to use docker, you may try the OpenEats installation instructions from over here:
-[OpenEats - Running_the_App With Docker](docs/Running_the_App.md)
+**Release**:
 
-But it is probably not working and needs to be fixed. Please feel free to PR the fix. 🙏
+Please note that currently no official docker images are provided.
+If you want to deploy the app via docker, you will have to [build it from source](docs/Running_the_App_in_dev.md).
+
+**From source**:
+
+If you just want to run the whole thing for some testing or demo purpose, you can use docker, [build it from source](docs/Running_the_App_in_dev.md), and run it locally.
+This is the most straight forward way, and you will have it up running in no time! :-)
+
+### Install without docker
+
+If for any reason you don't want to use docker, read the guide about [Running the App without Docker](docs/Running_the_App_Without_Docker.md),
+This is also the preferred [method for Single-Board-Computers](docs/Running_the_App_Tricks.md/#single-board-computer).
 
 ## [The Migration Guide from OpenEats can be found here](docs/Migrate_from_OpenEats.md)
 
@@ -34,5 +44,3 @@ But it is probably not working and needs to be fixed. Please feel free to PR the
 ## Contributing
 
 Please read the [contribution guidelines](CONTRIBUTING.md) in order to make the contribution process easy and effective for everyone involved.
-
-For a guide on how to setup an environment for development see [this guide](docs/Running_the_App_in_dev.md).

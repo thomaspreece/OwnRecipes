@@ -1,29 +1,36 @@
 # Updating the App
 
-First pull the latest from this repo:
+First pull the latest from the repos:
 ```bash
 cd OwnRecipes
+git pull
+
+cd ownrecipes-api
+git pull
+
+cd ../ownrecipes-web
 git pull
 ```
 
 Then check the release notes about any changes to the following files:
 - docker-prod.override.yml
-- env_prod.list
+- ownrecipes-api/.env.production
+- ownrecipes-web/.env.production
 
-There should only be changes to these files in major releases (IE. 2.0.0, 3.0.0)
+There should only be changes to these files in major releases (IE. 2.0.0, 3.0.0).
 
-Once you know your env and docker compose files are up to date, Run:
+Once you know your env and docker-compose files are up to date, run:
 
 ```bash
-./quick-start.py -t 1.0.3
+sudo ./quick-start.py -t 1.0.3
 ```
 OR
 ```bash
-./quick-start.py
+sudo ./quick-start.py
 ```
 OR
 ```bash
-./quick-start.py --help
+sudo ./quick-start.py --help
 ```
 
 The quick start script will do a few things.
