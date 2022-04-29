@@ -81,33 +81,33 @@ Then, open the file `/opt/ownrecipes/ownrecipes-api/.env.service.local` and chan
 
 *localhost:*
 
-`cp /opt/ownrecipes/ownrecipes-api/samples/no_docker/localhost/.env /opt/ownrecipes/ownrecipes-api/.env.service.local`
+`cp /opt/ownrecipes/ownrecipes-api/docs/samples/no_docker/localhost/.env /opt/ownrecipes/ownrecipes-api/.env.service.local`
 
 *server:*
 
-`cp /opt/ownrecipes/ownrecipes-api/samples/no_docker/server/.env /opt/ownrecipes/ownrecipes-api/.env.service.local`
+`cp /opt/ownrecipes/ownrecipes-api/docs/samples/no_docker/server/.env /opt/ownrecipes/ownrecipes-api/.env.service.local`
 
 *proxy:*
 
-`cp /opt/ownrecipes/ownrecipes-api/samples/no_docker/proxy/.env /opt/ownrecipes/ownrecipes-api/.env.service.local`
+`cp /opt/ownrecipes/ownrecipes-api/docs/samples/no_docker/proxy/.env /opt/ownrecipes/ownrecipes-api/.env.service.local`
 
 **Copy the /opt/ownrecipes/ownrecipes-api/base/prod-entrypoint.sh file:**
 
 *If you are using a different directory than "/opt/ownrecipes", then you have to adjust the file to your needs.*
 
-`cp /opt/ownrecipes/ownrecipes-api/samples/no_docker/prod-entrypoint.sh /opt/ownrecipes/ownrecipes-api/base/`
+`cp /opt/ownrecipes/ownrecipes-api/docs/samples/no_docker/prod-entrypoint.sh /opt/ownrecipes/ownrecipes-api/base/`
 
 **Copy the /opt/ownrecipes/ownrecipes-api/base/gunicorn_start.sh file:**
 
 *If you are using a different directory than "/opt/ownrecipes", or can't use the os user "ownrecipes", then you have to adjust the file to your needs.*
 
-`cp /opt/ownrecipes/ownrecipes-api/samples/no_docker/gunicorn_start.sh /opt/ownrecipes/ownrecipes-api/base/`
+`cp /opt/ownrecipes/ownrecipes-api/docs/samples/no_docker/gunicorn_start.sh /opt/ownrecipes/ownrecipes-api/base/`
 
 **Create systemd service to run the api:**
 
 *If you are using a different directory than "/opt/ownrecipes", or can't use the os user "ownrecipes", then you have to adjust the file to your needs.*
 
-`cp /opt/ownrecipes/ownrecipes-api/samples/no_docker/ownrecipes.service /lib/systemd/system/`
+`cp /opt/ownrecipes/ownrecipes-api/docs/samples/no_docker/ownrecipes.service /lib/systemd/system/`
 
 ### Create the OS user
 
