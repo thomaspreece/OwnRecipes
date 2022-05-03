@@ -29,7 +29,7 @@ docker cp /dir/on/local/system/site-media/. ownrecipes_api_1:/code/site-media/
 Places a sql dump of the database on your current working directory.
 
 ```sh
-docker exec ownrecipes_db_1 sh -c 'exec mysqldump ownrecipes -u root -p"$MYSQL_ROOT_PASSWORD"' > ownrecipes.sql
+docker exec ownrecipes_db_1 sh -c 'exec mysqldump ownrecipes -u root -p"$MYSQL_USER_PASSWORD"' > ownrecipes.sql
 ```
 
 #### Restoring:
@@ -40,7 +40,7 @@ Note: if you changed the database name then you will need to change the last wor
 ```sh
 cd /open/eats/root/
 source env_prod.list
-cat ownrecipes.sql | docker exec -i ownrecipes_db_1 /usr/bin/mysql -u root -p"$MYSQL_ROOT_PASSWORD" ownrecipes
+cat ownrecipes.sql | docker exec -i ownrecipes_db_1 /usr/bin/mysql -u root -p"$MYSQL_USER_PASSWORD" ownrecipes
 ```
 
 ### Sources
@@ -77,7 +77,7 @@ Places a sql dump of the database on your current working directory.
 ```sh
 cd /opt/ownrecipes/ownrecipes-api
 . ./.env
-mysqldump $MYSQL_DATABASE -u $MYSQL_USER -p"$MYSQL_ROOT_PASSWORD" > ownrecipes.sql
+mysqldump $MYSQL_DATABASE -u $MYSQL_USER -p"$MYSQL_USER_PASSWORD" > ownrecipes.sql
 ```
 
 #### Restoring:
@@ -85,5 +85,5 @@ mysqldump $MYSQL_DATABASE -u $MYSQL_USER -p"$MYSQL_ROOT_PASSWORD" > ownrecipes.s
 ```sh
 cd /opt/ownrecipes/ownrecipes-api
 . ./.env
-sudo mysql ownrecipes -u $MYSQL_USER -p"$MYSQL_ROOT_PASSWORD" < /path/to/your/ownrecipes.sql
+sudo mysql ownrecipes -u $MYSQL_USER -p"$MYSQL_USER_PASSWORD" < /path/to/your/ownrecipes.sql
 ```

@@ -17,7 +17,13 @@ The user for the database.
 
 EX: `MYSQL_USER=ownrecipes`
 
+#### MYSQL_USER_PASSWORD
+The password for the user given above.
+
+EX: `MYSQL_USER_PASSWORD=root`
+
 #### MYSQL_ROOT_PASSWORD
+Deprecated, use MYSQL_USER_PASSWORD instead.
 The password for the user given above.
 
 EX: `MYSQL_ROOT_PASSWORD=root`
