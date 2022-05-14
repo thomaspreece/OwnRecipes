@@ -150,7 +150,7 @@ If you see an error, add the python tools permanently to the path. To permanentl
 
 ```bash
 echo "export PATH=\$PATH:~/.local/bin" >> ~/.bashrc
-echo "export PATH=$PATH:~/.local/bin" >> /opt/ownrecipes/ownrecipes-api/.env
+echo "export PATH=$PATH:~/.local/bin" >> /opt/ownrecipes/ownrecipes-api/.env.service.local
 ```
 
 Restart the terminal session and re-validate that gunicorn is found.
@@ -165,18 +165,18 @@ sudo su ownrecipes
 
 ```bash
 cd /opt/ownrecipes/ownrecipes-api
-/bin/bash -ac '. .env; exec python3 manage.py makemigrations'
-/bin/bash -ac '. .env; exec python3 manage.py migrate'
-/bin/bash -ac '. .env; exec python3 manage.py createsuperuser'
+/bin/bash -ac '. .env.service.local; exec python3 manage.py makemigrations'
+/bin/bash -ac '. .env.service.local; exec python3 manage.py migrate'
+/bin/bash -ac '. .env.service.local; exec python3 manage.py createsuperuser'
 ```
 
 Optional: Seed the database with example data.
 ```bash
-/bin/bash -ac '. .env; exec python3 manage.py loaddata course_data.json'
-/bin/bash -ac '. .env; exec python3 manage.py loaddata cuisine_data.json'
-/bin/bash -ac '. .env; exec python3 manage.py loaddata news_data.json'
-/bin/bash -ac '. .env; exec python3 manage.py loaddata recipe_data.json'
-/bin/bash -ac '. .env; exec python3 manage.py loaddata ing_data.json'
+/bin/bash -ac '. .env.service.local; exec python3 manage.py loaddata course_data.json'
+/bin/bash -ac '. .env.service.local; exec python3 manage.py loaddata cuisine_data.json'
+/bin/bash -ac '. .env.service.local; exec python3 manage.py loaddata news_data.json'
+/bin/bash -ac '. .env.service.local; exec python3 manage.py loaddata recipe_data.json'
+/bin/bash -ac '. .env.service.local; exec python3 manage.py loaddata ing_data.json'
 ```
 
 ### Start the api
@@ -219,8 +219,9 @@ Run the api:
 
 *The following command will source the environment file and make the variables available to all subsequent called scripts.*
 
-`/bin/bash -ac '. .env; exec ./base/prod-entrypoint.sh'`
-
+```bash
+/bin/bash -ac '. .env.service.local; exec ./base/prod-entrypoint.sh'
+```
 
 <hr />
 
@@ -242,7 +243,7 @@ git clone https://github.com/ownrecipes/ownrecipes-web.git
 cd /opt/ownrecipes/ownrecipes-web/
 ```
 
-### Install the dependecies
+### Install the dependencies
 
 ```bash
 npm install
