@@ -4,7 +4,10 @@ This file will provide some context on the env settings.
 
 
 ## Database config
-Docker configurations come with MariaDB. We only need to set to options, the rest are not required.
+
+The following environment variables can be applied the ownrecipes-api/.env files.
+
+Docker configurations come with MariaDB. We only need to set the following options, the rest are not required.
 For a full list of settings see: https://hub.docker.com/_/mariadb/
 
 #### MYSQL_DATABASE
@@ -99,6 +102,21 @@ If you are using the docker configuation, set this to `True`.
 For more information, see: https://docs.djangoproject.com/en/1.10/ref/settings/#secure-proxy-ssl-header
 
 EX: `HTTP_X_FORWARDED_PROTO=False`
+
+#### ADMIN_URL
+The url the Django Admin Pages should be served from. Default is `admin`.
+
+EX: `ADMIN_URL=ownrecipes-admin`
+
+#### SITE_MEDIA_URL
+The url the media filse should be served from. Default is `site-media`.
+
+EX: `ADMIN_URL=ownrecipes-site-media`
+
+#### STATIC_FILES_URL
+The url the static files, like css files, should be served from. Default is `static-files`.
+
+EX: `ADMIN_URL=ownrecipes-static-files`
 
 
 ## Web config
