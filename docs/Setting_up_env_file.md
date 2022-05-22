@@ -118,6 +118,16 @@ The url the static files, like css files, should be served from. Default is `sta
 
 EX: `ADMIN_URL=ownrecipes-static-files`
 
+#### RECIPE_IMAGE_QUALITY
+
+Automatically reduces the size and quality of large images to save disk storage space. Default: MEDIUM.
+
+| Value  | File size (estimate) | Size (width x height) | Quality  |
+| ------ | -------------------- | --------------------- | -------- |
+| OFF    | Original             | Original              | Original |
+| HIGH   | 1200 kB              | 1920px x 1440px       | 97       |
+| MEDIUM | 600 kB               | 1440px x 1080px       | 94       |
+| LOW    | 350 kB               | 1024px x 768px        | 90       |
 
 ## Web config
 
