@@ -157,6 +157,9 @@ server {
 
     location /api {
         proxy_pass         http://127.0.0.1:5210;
+
+        # Allow the upload of any image size.
+        client_max_body_size 0;
     }
 
     location /static-files {
