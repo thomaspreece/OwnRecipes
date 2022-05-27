@@ -64,10 +64,7 @@ git pull
 
 Then check the release notes about any changes to the following files:
 - docker-prod.override.yml
-- ownrecipes-api/.env.service[.local]
-- ownrecipes-api/.env.development[.local]
-- ownrecipes-web/.env.service[.local]
-- ownrecipes-web/.env.development[.local]
+- ownrecipes-api/.env[.service|.development|.production][.local]
 
 There should only be changes to these files in major releases (IE. 2.0.0, 3.0.0).
 
