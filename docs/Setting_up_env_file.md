@@ -5,7 +5,7 @@ This file will provide some context on the env settings.
 
 ## Database config
 
-The following environment variables can be applied the ownrecipes-api/.env files.
+The following environment variables can be applied to the ownrecipes-api/.env files.
 
 Docker configurations come with MariaDB. We only need to set the following options, the rest are not required.
 For a full list of settings see: https://hub.docker.com/_/mariadb/
@@ -44,7 +44,7 @@ EX: `MYSQL_PORT=3306`
 
 ## API / Django config
 
-The following environment variables can be applied the ownrecipes-api/.env files.
+The following environment variables can be applied to the ownrecipes-api/.env files.
 
 #### API_URL
 This URL and port combination is used by gunicorn to serve the API.
@@ -131,7 +131,7 @@ Automatically reduces the size and quality of large images to save disk storage 
 
 ## Web config
 
-The following environment variables can be applied the ownrecipes-web/.env files.
+The following environment variables can be applied to the ownrecipes-web/.env files.
 
 #### REACT_APP_API_URL
 The hostname/port (my.example.com:5210) the frontend will call the API from.
@@ -150,10 +150,25 @@ If you are storing recipes that would otherwise cause Copyright infringement, or
 EX: `REACT_APP_REQUIRE_LOGIN=true`
 
 #### REACT_APP_LOCALE
-The language the UI will be in.
+The default (fallback) language the UI will be in.
 
 Options:
 - English: en
 - German: de
 
-EX: `NODE_LOCALE=de`
+EX: `REACT_APP_LOCALE=de`
+
+#### REACT_APP_LEGAL_URL
+If provided, a link to this url will be displayed in the footer.
+
+If your instance of OwnRecipes is reachable from the internet, it may be regulated by law that you have to provide a legal page.
+
+EX: `https://my-ownrecipes-instance.com/legal
+
+#### REACT_APP_PRIVACY_URL
+If provided, a link to this url will be displayed in the footer.
+
+If your instance of OwnRecipes is reachable from the internet, it may be regulated by law that you have to provide a privacy page.
+
+EX: `https://my-ownrecipes-instance.com/privacy
+

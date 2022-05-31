@@ -30,8 +30,8 @@ git clone https://github.com/ownrecipes/ownrecipes-web.git
 Then, copy the needed environment files:
 ```bash
 cp docs/samples/sample_docker_prod_override.yml docker-prod.override.yml
-cp ownrecipes-api/docs/samples/.env.production ownrecipes-api/.env.production.local
-cp ownrecipes-web/docs/samples/.env.production ownrecipes-web/.env.production.local
+cp ownrecipes-api/docs/samples/docker/.env ownrecipes-api/.env.production.local
+cp ownrecipes-web/.env.production ownrecipes-web/.env.production.local
 ```
 
 ### Note on docker-prod.override.yml

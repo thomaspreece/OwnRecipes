@@ -10,9 +10,9 @@ Running the App Without Docker in production requires some more steps:
 
 **Create environment file in /opt/ownrecipes-web/**
 
-`cp /opt/ownrecipes/ownrecipes-web/docs/samples/.env.production /opt/ownrecipes/ownrecipes-web/.env.production.local`
+`cp /opt/ownrecipes/ownrecipes-web/.env.production /opt/ownrecipes/ownrecipes-web/.env.production.local`
 
-Edit the created file `/opt/ownrecipes/ownrecipes-web/.env.production.local` and change the [variables](Setting_up_env_file.md) to your needs
+Edit the created file `/opt/ownrecipes/ownrecipes-web/.env.production.local` and change the [variables](Setting_up_env_file.md) to your needs.
 
 ### Run ownrecipes-web
 

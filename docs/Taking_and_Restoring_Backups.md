@@ -74,6 +74,8 @@ cp /dir/on/local/system/site-media/. /opt/openeats/openeats-api/site-media/
 
 Places a sql dump of the database on your current working directory.
 
+(Please point to your actual .env, e.g. `.env.service.local`.)
+
 ```sh
 cd /opt/ownrecipes/ownrecipes-api
 . ./.env
