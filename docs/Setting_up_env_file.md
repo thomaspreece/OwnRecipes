@@ -81,6 +81,27 @@ This should be set to `False` in production and `True` to debug any issues.
 
 EX: `DJANGO_DEBUG=False`
 
+#### LOGGING
+Set the logging behaviour (log level). Logs are written to file to `/path/to/ownrecipes-api/logs` and are named `\<logging>.log`.
+Make sure that ownrecipes has write access to the parent directory.
+
+Values (descriptions partially copied from https://docs.djangoproject.com/en/3.2/topics/logging/):
+
+| Value    | Description                     |
+| -------- | ------------------------------- |
+| OFF      | Turns logging off.              |
+| DEBUG    | Low level system information for debugging purposes. Should not be used for production to reduce disk usage etc. |
+| INFO     | General system information. Should not be used for production to reduce disk usage etc. |
+| WARNING  | Information describing a minor problem that has occurred. Can be helpful to fight issues in production. |
+| ERROR    | (Default) Information describing a major problem that has occurred. Can be helpful to fight issues in production. |
+| CRITICAL | Information describing a critical problem that has occurred. Can be helpful to fight issues in production. |
+
+EX: `LOGGING=DEBUG` , will write debug information to `/opt/ownrecipes/ownrecipes-api/logs/debug.log`.
+
+The logging configuration is provided by Django. Logging is a fairly complex and opinionated topic, therefore we won't cover it in detail here.
+For example, one can send errors straight via e-mail.
+If needed, please find more information in the [documentation of Django about logging](https://docs.djangoproject.com/en/3.2/topics/logging/).
+
 #### ALLOWED_HOST
 The hostname that the API is being served from.
 
