@@ -35,11 +35,11 @@ docker exec ownrecipes_db_1 sh -c 'exec mysqldump ownrecipes -u root -p"$MYSQL_U
 #### Restoring:
 
 First cd into the dir that contains your sql backup. Once there you need to source your env file so you don't have to type your database password on the command line. Then run the last command to start the restore.
-Note: if you changed the database name then you will need to change the last word the statement below to the database name you gave OpenEats.
+Note: if you changed the database name then you will need to change the last word the statement below to the database name you gave OwnRecipes.
 
 ```sh
-cd /open/eats/root/
-source env_prod.list
+cd OwnRecipes
+source .env.docker.production.api
 cat ownrecipes.sql | docker exec -i ownrecipes_db_1 /usr/bin/mysql -u root -p"$MYSQL_USER_PASSWORD" ownrecipes
 ```
 

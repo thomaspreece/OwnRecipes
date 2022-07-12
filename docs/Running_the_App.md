@@ -13,8 +13,7 @@ Install [docker and docker-compose](Install_Prerequisites.md/#docker).
 
 ## Coming from OpenEats?
 
-The project setup has changed. The env-file was split up to the repos of ownrecipes-api and ownrecipes-web.
-That reduces the complexity of the env-file and helps to better understand the variables meaning.
+See the [Migration Guide](Migrating_from_OpenEats.md).
 
 ## Setup docker configuration for production
 
@@ -22,16 +21,11 @@ First clone the repos:
 ```bash
 git clone https://github.com/ownrecipes/OwnRecipes.git
 cd OwnRecipes
-
-git clone https://github.com/ownrecipes/ownrecipes-api.git
-git clone https://github.com/ownrecipes/ownrecipes-web.git
 ```
 
 Then, copy the needed environment files:
 ```bash
 cp docs/samples/sample_docker_prod_override.yml docker-prod.override.yml
-cp ownrecipes-api/docs/samples/docker/.env ownrecipes-api/.env.production.local
-cp ownrecipes-web/.env.production ownrecipes-web/.env.production.local
 ```
 
 ### Note on docker-prod.override.yml
@@ -42,17 +36,17 @@ By default the nginx docker container will serve as a reverse proxy for the othe
 
 ### Configure the environment file
 
-Most of the settings in your `.env.production.local` files can stay the same. There are a few config settings that need to be changed for most configurations.
+Most of the settings in your env-files can stay the same. There are a few config settings that need to be changed for most configurations.
 See [Setting_up_env_file.md](Setting_up_env_file.md) for a complete description of the environment variables.
 
-`ownrecipes-api/.env.production.local`:
+`.env.docker.production.api`:
 
 - [MYSQL_USER_PASSWORD](Setting_up_env_file.md#MYSQL_USER_PASSWORD)
 - [DJANGO_SECRET_KEY](Setting_up_env_file.md#DJANGO_SECRET_KEY)
 - [ALLOWED_HOST](Setting_up_env_file.md#ALLOWED_HOST)
 - [NODE_URL](Setting_up_env_file.md#NODE_URL)
 
-`ownrecipes-web/.env.production.local`:
+`.env.docker.production.web`:
 
 - [REACT_APP_API_URL](Setting_up_env_file.md#REACT_APP_API_URL)
 

@@ -68,7 +68,7 @@ def start_containers():
             ' > ownrecipes.sql',
             shell=True
         )
-    elif 'MYSQL_HOST' in open('env_prod.list').read():
+    elif 'MYSQL_HOST' in open('.env.docker.production.api').read():
         # TODO: add process to backup remote DB
         print("Using remote DB...")
     else:

@@ -9,8 +9,7 @@ services:
       timeout: 20s
       retries: 20
     env_file:
-      - ownrecipes-api/.env
-      - ownrecipes-api/.env.production
+      - .env.docker.production.api
   api:
     image: ownrecipes/ownrecipes-api
     command: /startup/prod-entrypoint.sh
@@ -22,15 +21,13 @@ services:
       db:
         condition: service_healthy
     env_file:
-      - ownrecipes-api/.env
-      - ownrecipes-api/.env.production
+      - .env.docker.production.api
   web:
     image: ownrecipes/ownrecipes-web
     volumes:
-      - public-ui:/code/build
+      - public-ui:/code
     env_file:
-      - ownrecipes-web/.env
-      - ownrecipes-web/.env.production
+      - .env.docker.production.web
   nginx:
     image: ownrecipes/ownrecipes-nginx
     command: ./start.sh
@@ -42,8 +39,7 @@ services:
       - api
       - web
     env_file:
-      - ownrecipes-api/.env
-      - ownrecipes-api/.env.production
+      - .env.docker.production.api
 volumes:
   database:
   public-ui:

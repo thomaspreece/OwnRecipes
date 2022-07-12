@@ -193,3 +193,5 @@ If your instance of OwnRecipes is reachable from the internet, it may be regulat
 
 EX: `https://my-ownrecipes-instance.com/privacy
 
+#### REACT_APP_DEMO
+If set to 'true', then the app will run in demo mode.

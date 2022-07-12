@@ -16,8 +16,8 @@ git pull
 
 Then check the release notes about any changes to the following files:
 - docker-prod.override.yml
-- ownrecipes-api/.env.production
-- ownrecipes-web/.env.production
+- .env.docker.production.api
+- .env.docker.production.web
 
 There should only be changes to these files in major releases (IE. 2.0.0, 3.0.0).
 
@@ -65,6 +65,7 @@ git pull
 Then check the release notes about any changes to the following files:
 - docker-prod.override.yml
 - ownrecipes-api/.env[.service|.development|.production][.local]
+- ownrecipes-web/.env[.service|.development|.production][.local]
 
 There should only be changes to these files in major releases (IE. 2.0.0, 3.0.0).
 
