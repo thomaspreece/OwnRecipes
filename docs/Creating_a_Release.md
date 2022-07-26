@@ -83,11 +83,11 @@ npm install
 npm run build
 
 # Build the image, tag it
-docker build . -f Dockerfile-release -t ownrecipes/ownrecipes-api:<tag> .
-docker build . -f Dockerfile-release -t ownrecipes/ownrecipes-api:latest .
+docker build . -f Dockerfile-release -t ownrecipes/ownrecipes-web:<tag> .
+docker build . -f Dockerfile-release -t ownrecipes/ownrecipes-web:latest .
 
 # Upload it to docker-hub
 docker login
-docker push ownrecipes/ownrecipes-api:<tag>
-docker push ownrecipes/ownrecipes-api:latest
+docker push ownrecipes/ownrecipes-web:<tag>
+docker push ownrecipes/ownrecipes-web:latest
 ```

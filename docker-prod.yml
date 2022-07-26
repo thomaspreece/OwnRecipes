@@ -25,7 +25,7 @@ services:
   web:
     image: ownrecipes/ownrecipes-web
     volumes:
-      - public-ui:/code
+      - public-ui:/code/public-ui
     env_file:
       - .env.docker.production.web
   nginx:

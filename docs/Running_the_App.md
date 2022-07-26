@@ -41,7 +41,7 @@ See [Setting_up_env_file.md](Setting_up_env_file.md) for a complete description 
 
 `.env.docker.production.api`:
 
-- [MYSQL_USER_PASSWORD](Setting_up_env_file.md#MYSQL_USER_PASSWORD)
+- [MYSQL_ROOT_PASSWORD](Setting_up_env_file.md#MYSQL_ROOT_PASSWORD)
 - [DJANGO_SECRET_KEY](Setting_up_env_file.md#DJANGO_SECRET_KEY)
 - [ALLOWED_HOST](Setting_up_env_file.md#ALLOWED_HOST)
 - [NODE_URL](Setting_up_env_file.md#NODE_URL)
@@ -75,7 +75,7 @@ If you are connecting the API to a remote DB (any non-dockerized DB) you need to
 
 - [MYSQL_DATABASE](Setting_up_env_file.md#MYSQL_DATABASE)
 - [MYSQL_USER](Setting_up_env_file.md#MYSQL_USER)
-- [MYSQL_USER_PASSWORD](Setting_up_env_file.md#MYSQL_USER_PASSWORD)
+- [MYSQL_PASSWORD](Setting_up_env_file.md#MYSQL_PASSWORD)
 - [MYSQL_HOST](Setting_up_env_file.md#MYSQL_HOST)
 - [MYSQL_PORT](Setting_up_env_file.md#MYSQL_PORT)
 

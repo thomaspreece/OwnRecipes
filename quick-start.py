@@ -64,7 +64,7 @@ def start_containers():
         print("Taking a database backup (saving as ownrecipes.sql)...")
         call(
             'docker exec ownrecipes_db_1 sh -c ' +
-            '\'exec mysqldump ownrecipes -u root -p"$MYSQL_USER_PASSWORD"\'' +
+            '\'exec mysqldump ownrecipes -u root -p"$MYSQL_ROOT_PASSWORD"\'' +
             ' > ownrecipes.sql',
             shell=True
         )

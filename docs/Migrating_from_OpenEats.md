@@ -19,7 +19,6 @@ Please be aware that there are also some new env-variables. Those are not listed
 
 | OpenEats     | OwnRecipes |
 | ------------ | ---------- |
-| MYSQL_ROOT_PASSWORD | MYSQL_USER_PASSWORD |
 | NODE_ENV     | (removed)  |
 | NODE_URL     | (still there, but part of the api env) |
 | NODE_API_URL | REACT_APP_API_URL |

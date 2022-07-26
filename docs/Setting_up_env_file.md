@@ -10,6 +10,20 @@ The following environment variables can be applied to the ownrecipes-api/.env fi
 Docker configurations come with MariaDB. We only need to set the following options, the rest are not required.
 For a full list of settings see: https://hub.docker.com/_/mariadb/
 
+#### MYSQL_HOST
+The address or hostname of the DB.
+
+Do not include this in your env file if you are using docker to house the DB.
+
+EX: `MYSQL_HOST=my.db.com`
+
+#### MYSQL_PORT
+The port the database is exposed on.
+
+Do not include this in your env file if you are using docker to house the DB.
+
+EX: `MYSQL_PORT=3306`
+
 #### MYSQL_DATABASE
 The database name.
 
@@ -18,28 +32,23 @@ EX: `MYSQL_DATABASE=ownrecipes`
 #### MYSQL_USER
 The user for the database.
 
+Do not include this in your env file if you are using docker to house the DB.
+
 EX: `MYSQL_USER=ownrecipes`
 
-#### MYSQL_USER_PASSWORD
+#### MYSQL_PASSWORD
 The password for the user given above.
 
-EX: `MYSQL_USER_PASSWORD=root`
+Do not include this in your env file if you are using docker to house the DB.
+
+EX: `MYSQL_PASSWORD=root`
 
 #### MYSQL_ROOT_PASSWORD
-Deprecated, use MYSQL_USER_PASSWORD instead.
-The password for the user given above.
+The password for the mysql root user.
 
-EX: `MYSQL_ROOT_PASSWORD=root`
+Only required if running the database via docker.
 
-#### MYSQL_HOST
-The address or hostname of the DB. Do not include this in your env file if you are using docker to house the DB.
-
-EX: `MYSQL_HOST=my.db.com`
-
-#### MYSQL_PORT
-The port the database is exposed on.
-
-EX: `MYSQL_PORT=3306`
+EX: `MYSQL_ROOT_PASSWORD=db-trustNo1`
 
 
 ## API / Django config
@@ -110,14 +119,14 @@ For more information, see: https://docs.djangoproject.com/en/1.11/ref/settings/#
 EX: `ALLOWED_HOST=ryannoelk.com`
 
 #### NODE_URL
-The URL and port node is served from.
+The URL and port the web-app is served from.
 The API will use this to prevent CORS issues.
 
 EX: `NODE_URL=localhost:8080`
 
 #### HTTP_X_FORWARDED_PROTO
-If you are serving content behind an HTTPS proxy.
-Set this to `True`, otherwise `False`.
+If you are serving content behind an HTTPS proxy,
+set this to `True`, otherwise `False`.
 If you are using the docker configuation, set this to `True`.
 
 For more information, see: https://docs.djangoproject.com/en/1.10/ref/settings/#secure-proxy-ssl-header
