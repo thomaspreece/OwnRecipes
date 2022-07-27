@@ -2,7 +2,7 @@
 # encoding: utf-8
 
 from time import sleep
-from os import getcwd
+from os import getcwd, name as os_name
 from subprocess import call, Popen, PIPE
 
 
@@ -62,12 +62,20 @@ def start_containers():
     output, err = p.communicate(b"input data that is passed to subprocess' stdin")
     if output and not err:
         print("Taking a database backup (saving as ownrecipes.sql)...")
-        call(
-            'docker exec ownrecipes_db_1 sh -c ' +
-            '\'exec mysqldump ownrecipes -u root -p"$MYSQL_ROOT_PASSWORD"\'' +
-            ' > ownrecipes.sql',
-            shell=True
-        )
+        if os_name == 'nt':
+            call(
+                'docker exec ownrecipes_db_1 sh -c ' +
+                '"exec mysqldump ownrecipes -u root -p"$MYSQL_ROOT_PASSWORD""' +
+                ' > ownrecipes.sql',
+                shell=True
+            )
+        else:
+            call(
+                'docker exec ownrecipes_db_1 sh -c ' +
+                '\'exec mysqldump ownrecipes -u root -p"$MYSQL_ROOT_PASSWORD"\'' +
+                ' > ownrecipes.sql',
+                shell=True
+            )
     elif 'MYSQL_HOST' in open('.env.docker.production.api').read():
         # TODO: add process to backup remote DB
         print("Using remote DB...")
