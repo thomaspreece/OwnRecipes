@@ -57,7 +57,7 @@ cat ownrecipes.sql | docker exec -i ownrecipes_db_1 /usr/bin/mysql -u root -p"$M
 Replace `/dir/on/local/system/` with the location where you would like your images.
 
 ```sh
-cp /opt/openeats/openeats-api/site-media /dir/on/local/system/
+cp /opt/ownrecipes/ownrecipes-api/site-media /dir/on/local/system/
 ```
 
 #### Restoring:
@@ -65,7 +65,7 @@ cp /opt/openeats/openeats-api/site-media /dir/on/local/system/
 Replace `/dir/on/local/system/` with the location where you would like your images.
 
 ```sh
-cp /dir/on/local/system/site-media/. /opt/openeats/openeats-api/site-media/
+cp /dir/on/local/system/site-media/. /opt/ownrecipes/ownrecipes-api/site-media/
 ```
 
 ### Database
