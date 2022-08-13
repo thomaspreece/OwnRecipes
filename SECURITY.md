@@ -11,7 +11,7 @@ the latest version first.
 Please contact the OwnRecipes-team via email: ownrecipes@gmx.de
 
 For now, we do not provide any e2e encryption. If you think it is needed,
-write us an email upfront and we will set up ppg.
+write us an email upfront and we will set up pgp.
 
 To make things go fast, provide sufficient information about:
 

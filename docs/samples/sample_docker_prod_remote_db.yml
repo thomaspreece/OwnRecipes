@@ -8,16 +8,13 @@ services:
       - static-files:/code/static-files
       - site-media:/code/site-media
     env_file:
-      env_prod.list
+      - .env.docker.production.api
   web:
     image: ownrecipes/ownrecipes-web
-    command: yarn start
-    depends_on:
-      - api
     volumes:
-      - public-ui:/code/build
+      - public-ui:/code/public
     env_file:
-      env_prod.list
+      - .env.docker.production.web
   nginx:
     image: ownrecipes/ownrecipes-nginx
     command: ./start.sh
@@ -29,7 +26,7 @@ services:
       - api
       - web
     env_file:
-      env_prod.list
+      - .env.docker.production.api
 volumes:
   public-ui:
   static-files:

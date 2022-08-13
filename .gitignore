@@ -17,7 +17,7 @@ secrets/*
 *.js.map
 *.log
 *.pyc
-env_prod.list
+.env*.local
 docker-prod.version.yml
 docker-prod.override.yml
 docker-compose.override.yml

@@ -1,11 +1,28 @@
 ## Configuing your Environment
 
-This file will provide some context on the env file.
+This file will provide some context on the env settings.
 
 
 ## Database config
-Docker configurations come with MariaDB. We only need to set to options, the rest are not required.
+
+The following environment variables can be applied to the ownrecipes-api/.env files.
+
+Docker configurations come with MariaDB. We only need to set the following options, the rest are not required.
 For a full list of settings see: https://hub.docker.com/_/mariadb/
+
+#### MYSQL_HOST
+The address or hostname of the DB.
+
+Do not include this in your env file if you are using docker to house the DB.
+
+EX: `MYSQL_HOST=my.db.com`
+
+#### MYSQL_PORT
+The port the database is exposed on.
+
+Do not include this in your env file if you are using docker to house the DB.
+
+EX: `MYSQL_PORT=3306`
 
 #### MYSQL_DATABASE
 The database name.
@@ -15,25 +32,29 @@ EX: `MYSQL_DATABASE=ownrecipes`
 #### MYSQL_USER
 The user for the database.
 
+Do not include this in your env file if you are using docker to house the DB.
+
 EX: `MYSQL_USER=ownrecipes`
 
-#### MYSQL_ROOT_PASSWORD
+#### MYSQL_PASSWORD
 The password for the user given above.
 
-EX: `MYSQL_ROOT_PASSWORD=root`
+Do not include this in your env file if you are using docker to house the DB.
 
-#### MYSQL_HOST
-The address or hostname of the DB. Do not include this in your env file if you are using docker to house the DB.
+EX: `MYSQL_PASSWORD=root`
 
-EX: `MYSQL_HOST=my.db.com`
+#### MYSQL_ROOT_PASSWORD
+The password for the mysql root user.
 
-#### MYSQL_PORT
-The port the database is exposed on.
+Only required if running the database via docker.
 
-EX: `MYSQL_PORT=3306`
+EX: `MYSQL_ROOT_PASSWORD=db-trustNo1`
 
 
-## Django config
+## API / Django config
+
+The following environment variables can be applied to the ownrecipes-api/.env files.
+
 #### API_URL
 This URL and port combination is used by gunicorn to serve the API.
 For docker instances we need to serve via `0.0.0.0`.
@@ -42,12 +63,12 @@ If a host has two IP addresses, 192.168.1.1 and 10.1.2.1,
 and a server running on the host listens on 0.0.0.0,
 it will be reachable at both of those IPs.
 
-EX: `API_URL=0.0.0.0:8000`
+EX: `API_URL=0.0.0.0:5210`
 
 #### API_PORT
 The port the API is served from.
 
-EX: `API_PORT=8000`
+EX: `API_PORT=5210`
 
 #### DJANGO_SECRET_KEY
 A secret key for a particular Django installation.
@@ -69,6 +90,27 @@ This should be set to `False` in production and `True` to debug any issues.
 
 EX: `DJANGO_DEBUG=False`
 
+#### LOGGING
+Set the logging behaviour (log level). Logs are written to file to `/path/to/ownrecipes-api/logs` and are named `\<logging>.log`.
+Make sure that ownrecipes has write access to the parent directory.
+
+Values (descriptions partially copied from https://docs.djangoproject.com/en/3.2/topics/logging/):
+
+| Value    | Description                     |
+| -------- | ------------------------------- |
+| OFF      | Turns logging off.              |
+| DEBUG    | Low level system information for debugging purposes. Should not be used for production to reduce disk usage etc. |
+| INFO     | General system information. Should not be used for production to reduce disk usage etc. |
+| WARNING  | Information describing a minor problem that has occurred. Can be helpful to fight issues in production. |
+| ERROR    | (Default) Information describing a major problem that has occurred. Can be helpful to fight issues in production. |
+| CRITICAL | Information describing a critical problem that has occurred. Can be helpful to fight issues in production. |
+
+EX: `LOGGING=DEBUG` , will write debug information to `/opt/ownrecipes/ownrecipes-api/logs/debug.log`.
+
+The logging configuration is provided by Django. Logging is a fairly complex and opinionated topic, therefore we won't cover it in detail here.
+For example, one can send errors straight via e-mail.
+If needed, please find more information in the [documentation of Django about logging](https://docs.djangoproject.com/en/3.2/topics/logging/).
+
 #### ALLOWED_HOST
 The hostname that the API is being served from.
 
@@ -76,42 +118,89 @@ For more information, see: https://docs.djangoproject.com/en/1.11/ref/settings/#
 
 EX: `ALLOWED_HOST=ryannoelk.com`
 
+#### NODE_URL
+The URL and port the web-app is served from.
+The API will use this to prevent CORS issues.
+
+EX: `NODE_URL=localhost:8080`
+
 #### HTTP_X_FORWARDED_PROTO
-If you are serving content behind an HTTPS proxy.
-Set this to `True`, otherwise `False`.
+If you are serving content behind an HTTPS proxy,
+set this to `True`, otherwise `False`.
 If you are using the docker configuation, set this to `True`.
 
 For more information, see: https://docs.djangoproject.com/en/1.10/ref/settings/#secure-proxy-ssl-header
 
 EX: `HTTP_X_FORWARDED_PROTO=False`
 
+#### ADMIN_URL
+The url the Django Admin Pages should be served from. Default is `admin`.
 
-## Node config
+EX: `ADMIN_URL=ownrecipes-admin`
 
-#### NODE_ENV=production
-This tells node whether to build a production or dev version of the bundle.
+#### SITE_MEDIA_URL
+The url the media filse should be served from. Default is `site-media`.
 
-EX: `NODE_ENV=production`
+EX: `SITE_MEDIA_URL=ownrecipes-site-media`
 
-#### NODE_URL
-The URL and port node is served from.
-The API will use this to prevent CORS issues.
+#### STATIC_FILES_URL
+The url the static files, like css files, should be served from. Default is `static-files`.
 
-EX: `NODE_URL=localhost:8080`
+EX: `STATIC_FILES_URL=ownrecipes-static-files`
 
-#### NODE_API_URL
-The hostname/port (my.example.com:8080) the frontend will call the API from.
+#### RECIPE_IMAGE_QUALITY
+
+Automatically reduces the size and quality of large images to save disk storage space. Default: MEDIUM.
+
+| Value  | File size (estimate) | Size (width x height) | Quality  |
+| ------ | -------------------- | --------------------- | -------- |
+| OFF    | Original             | Original              | Original |
+| HIGH   | 1200 kB              | 1920px x 1440px       | 97       |
+| MEDIUM | 600 kB               | 1440px x 1080px       | 94       |
+| LOW    | 350 kB               | 1024px x 768px        | 90       |
+
+## Web config
+
+The following environment variables can be applied to the ownrecipes-web/.env files.
+
+#### REACT_APP_API_URL
+The hostname/port (my.example.com:5210) the frontend will call the API from.
 If unset, the UI will call the API from the same hostname/port. If you are not using the default Nginx server that OwnRecipes comes with, you will either need to set this or configure your own proxy server to redirect all traffic that starts with `/api` or `/admin`.
 
-EX: `NODE_API_URL=http://localhost:8080`, `NODE_API_URL=https://api.example.com`
+EX: `REACT_APP_API_URL=http://localhost:5210`, `REACT_APP_API_URL=https://api.example.com`
 
-#### NODE_LOCALE
-The language the UI will be in.
+### REACT_APP_ADMIN_URL
+If you have set up a different url for the DJANGO admin page, then you will have to set this variable accordingly.
+
+EX: `REACT_APP_API_URL=http://localhost:5210/some-admin-path`, `REACT_APP_API_URL=https://admin.api.example.com`
+
+### REACT_APP_REQUIRE_LOGIN
+If you are storing recipes that would otherwise cause Copyright infringement, or you generally don't want strangers to view your recipes, then you can make OwnRecipes require a login to use any content. If set to `true`, users that are not logged in will be redirected to the login page.
+
+EX: `REACT_APP_REQUIRE_LOGIN=true`
+
+#### REACT_APP_LOCALE
+The default (fallback) language the UI will be in.
 
 Options:
 - English: en
 - German: de
-- Spanish: es
-- French: fr
 
-EX: `NODE_LOCALE=en`
+EX: `REACT_APP_LOCALE=de`
+
+#### REACT_APP_LEGAL_URL
+If provided, a link to this url will be displayed in the footer.
+
+If your instance of OwnRecipes is reachable from the internet, it may be regulated by law that you have to provide a legal page.
+
+EX: `https://my-ownrecipes-instance.com/legal
+
+#### REACT_APP_PRIVACY_URL
+If provided, a link to this url will be displayed in the footer.
+
+If your instance of OwnRecipes is reachable from the internet, it may be regulated by law that you have to provide a privacy page.
+
+EX: `https://my-ownrecipes-instance.com/privacy
+
+#### REACT_APP_DEMO
+If set to 'true', then the app will run in demo mode.

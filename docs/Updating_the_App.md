@@ -1,29 +1,38 @@
 # Updating the App
 
-First pull the latest from this repo:
+## Running the App with Docker
+
+First pull the latest from the repos:
 ```bash
 cd OwnRecipes
+git pull
+
+cd ownrecipes-api
+git pull
+
+cd ../ownrecipes-web
 git pull
 ```
 
 Then check the release notes about any changes to the following files:
 - docker-prod.override.yml
-- env_prod.list
+- .env.docker.production.api
+- .env.docker.production.web
 
-There should only be changes to these files in major releases (IE. 2.0.0, 3.0.0)
+There should only be changes to these files in major releases (IE. 2.0.0, 3.0.0).
 
-Once you know your env and docker compose files are up to date, Run:
+Once you know your env and docker-compose files are up to date, run:
 
 ```bash
-./quick-start.py -t 1.0.3
+sudo ./quick-start.py -t 1.0.3
 ```
 OR
 ```bash
-./quick-start.py
+sudo ./quick-start.py
 ```
 OR
 ```bash
-./quick-start.py --help
+sudo ./quick-start.py --help
 ```
 
 The quick start script will do a few things.
@@ -33,3 +42,33 @@ The quick start script will do a few things.
 4. Restarts the OwnRecipes servers.
 
 Enjoy!
+
+## Updating the app without docker
+
+You managed to run the App without docker, what is pretty cool.
+Updating is a bit more involved, as running the App without docker is anyway.
+
+First pull the latest from the repos:
+```bash
+sudo su ownrecipes
+
+cd OwnRecipes
+git pull
+
+cd ownrecipes-api
+git pull
+
+cd ../ownrecipes-web
+git pull
+```
+
+Then check the release notes about any changes to the following files:
+- docker-prod.override.yml
+- ownrecipes-api/.env[.service|.development|.production][.local]
+- ownrecipes-web/.env[.service|.development|.production][.local]
+
+There should only be changes to these files in major releases (IE. 2.0.0, 3.0.0).
+
+Then, [install the python requirements for ownrecipes-api](Running_the_App_Without_Docker_in_dev/#install-the-python-requirements) and [update all the dependencies for ownrecipes-web](Running_the_App_Without_Docker_in_dev/#install-the-dependencies).
+
+Next, apply any [migrations for the api/database](Running_the_App_Without_Docker_in_dev/#populate-the-database).
