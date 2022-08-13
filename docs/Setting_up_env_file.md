@@ -141,12 +141,12 @@ EX: `ADMIN_URL=ownrecipes-admin`
 #### SITE_MEDIA_URL
 The url the media filse should be served from. Default is `site-media`.
 
-EX: `ADMIN_URL=ownrecipes-site-media`
+EX: `SITE_MEDIA_URL=ownrecipes-site-media`
 
 #### STATIC_FILES_URL
 The url the static files, like css files, should be served from. Default is `static-files`.
 
-EX: `ADMIN_URL=ownrecipes-static-files`
+EX: `STATIC_FILES_URL=ownrecipes-static-files`
 
 #### RECIPE_IMAGE_QUALITY
 
