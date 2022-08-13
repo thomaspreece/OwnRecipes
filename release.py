@@ -4,7 +4,7 @@
 import json
 import requests
 from requests.auth import HTTPBasicAuth
-from secrets.secrets import username, password
+import secrets
 
 
 def release(_repo, _tag, _name, _target, _body, _draft, _prerelease):
@@ -22,7 +22,7 @@ def release(_repo, _tag, _name, _target, _body, _draft, _prerelease):
           "draft": _draft,
           "prerelease": _prerelease
         },
-        auth=HTTPBasicAuth(username, password)
+        auth=HTTPBasicAuth(secrets.username, secrets.password)
     )
     print('Status: %s' % response)
     print('Response: %s' % response.text)

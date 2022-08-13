@@ -1,11 +1,5 @@
 # Running the App
 
-**:warning: Following the steps below will install the latest version of OpenEats! :warning:**
-
-**Please note that OwnRecipes does not provide a stable release via docker, yet. If you wish to run OwnRecipes via docker, you will have to compile the docker containers yourself. Please find all needed information in [Running_the_App in dev](Running_the_App_in_dev.md)**
-
----------------------------------
-
 ## Install Prerequisites
 
 Install [git](Install_Prerequisites.md/#git).
