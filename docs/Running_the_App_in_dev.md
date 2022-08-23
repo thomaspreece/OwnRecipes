@@ -18,9 +18,6 @@ git clone https://github.com/ownrecipes/ownrecipes-web.git
 
 Then run it:
 ```bash
-# cd back into OwnRecipes
-cd ..
-
 sudo docker-compose --profile all build
 sudo docker-compose --profile all up
 ```
