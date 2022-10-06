@@ -2,6 +2,17 @@
 
 Following this guide, you will set up the database MariaDB, the ownrecipes-api and ownrecipes-web.
 
+<details>
+  <summary>⚠ Note for Windows users</summary>
+  <p>
+    This documentation is written for Linux-based systems.
+    This documentation will not work with Windows, and you will have a hard time to get the set up done on Windows.
+  </p>
+  <p>
+    Your best bet is to use Linux, or docker.
+  </p>
+</details>
+
 ## Install Prerequisites
 
 `sudo apt install git build-essential`

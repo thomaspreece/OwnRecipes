@@ -1,5 +1,17 @@
 # Running the App
 
+<details>
+  <summary>⚠ Note for Windows users</summary>
+  <p>
+    This documentation is written for Linux-based systems.
+    If you are using Windows, please be aware of some subtle changes:
+    <ol>
+      <li>Do not use the built-in commad-line, but the PowerShell. Some syntax will not work on the command-line.</li>
+      <li>There is no sudo. Most of the commands will work without the sudo. If you encounter permission errors, please run your PowerShell as administrator.</li>
+    </ol>
+  </p>
+</details>
+
 ## Install Prerequisites
 
 Install [git](Install_Prerequisites.md/#git).
