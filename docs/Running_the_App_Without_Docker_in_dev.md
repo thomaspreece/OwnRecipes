@@ -265,3 +265,18 @@ npm install
 ```bash
 npm start
 ```
+
+## Finish up
+
+The set up is complete and everything should be up and running.
+
+You can visit the [Admin Site](Admin_site.md), to create some more users, customize the news, or manage some lists.
+
+Or you can straight away log in to the OwnRecipes web app. By default, the url will be `http://localhost:8080`.
+
+OwnRecipes will shut down with your system. You can simply launch OwnRecipes by running:
+```bash
+cd /opt/ownrecipes/ownrecipes-web/
+sudo service ownrecipes start
+npm start
+```

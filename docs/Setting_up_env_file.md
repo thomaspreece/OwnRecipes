@@ -172,7 +172,7 @@ EX: `REACT_APP_API_URL=http://localhost:5210`, `REACT_APP_API_URL=https://api.ex
 ### REACT_APP_ADMIN_URL
 If you have set up a different url for the DJANGO admin page, then you will have to set this variable accordingly.
 
-EX: `REACT_APP_API_URL=http://localhost:5210/some-admin-path`, `REACT_APP_API_URL=https://admin.api.example.com`
+EX: `REACT_APP_ADMIN_URL=http://localhost:5210/some-admin-path`, `REACT_APP_ADMIN=https://admin.api.example.com`
 
 ### REACT_APP_REQUIRE_LOGIN
 If you are storing recipes that would otherwise cause Copyright infringement, or you generally don't want strangers to view your recipes, then you can make OwnRecipes require a login to use any content. If set to `true`, users that are not logged in will be redirected to the login page.
