@@ -69,3 +69,33 @@ OwnRecipes will shut down with your system. You can simply launch OwnRecipes by 
 cd OwnRecipes
 sudo docker-compose --profile all up
 ```
+
+## Updating to a new (develop) version
+
+When updating your local version that is deployed via docker,
+you have to keep in mind that the installed dependencies
+are being cached to reduce startup times.
+
+Thus, when you update your local version and the new version
+requires new dependencies (or new package versions), you will
+have to clean up the related local docker stuff.
+
+First, clean up everything:
+```bash
+cd OwnRecipes
+sudo docker-compose --profile all down
+```
+
+Then, update your local repositories:
+```bash
+cd ownrecipes-api
+git checkout development
+git pull
+
+cd ../
+cd ownrecipes-web
+git checkout development
+git pull
+```
+
+Finally, [build and run OwnRecipes](#setup-ownrecipes), as you usually would.
