@@ -6,6 +6,17 @@ Running the App Without Docker in production requires some more steps:
 3. You need to build the api.
 4. To serve the web and api, you probably want and need to [configure a web server](#web-server-apache-2-option-1).
 
+<details>
+  <summary>⚠ Note for Windows users</summary>
+  <p>
+    This documentation is written for Linux-based systems.
+    This documentation will not work with Windows, and you will have a hard time to get the set up done on Windows.
+  </p>
+  <p>
+    Your best bet is to use Linux, or docker.
+  </p>
+</details>
+
 ### Setup the ownrecipes environment files
 
 **Create environment file in /opt/ownrecipes-web/**
@@ -194,6 +205,13 @@ It is HIGHLY recommended you eventually switch over to an HTTPS setup. Let's Enc
 
 <hr />
 
+## Finish up
+
+The set up is complete and everything should be up and running.
+
+You can visit the [Admin Site](Admin_site.md), to create some more users, customize the news, or manage some lists.
+
+Or you can straight away log in to the OwnRecipes web app. By default, the url will be `http://localhost:8080`, or `http://<ownrecipes.domain.com>:8080`.
 
 ## Updating OwnRecipes
 

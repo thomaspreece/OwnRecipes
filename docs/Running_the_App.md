@@ -1,5 +1,17 @@
 # Running the App
 
+<details>
+  <summary>⚠ Note for Windows users</summary>
+  <p>
+    This documentation is written for Linux-based systems.
+    If you are using Windows, please be aware of some subtle changes:
+    <ol>
+      <li>Do not use the built-in commad-line, but the PowerShell. Some syntax will not work on the command-line.</li>
+      <li>There is no sudo. Most of the commands will work without the sudo. If you encounter permission errors, please run your PowerShell as administrator.</li>
+    </ol>
+  </p>
+</details>
+
 ## Install Prerequisites
 
 Install [git](Install_Prerequisites.md/#git).
@@ -119,3 +131,11 @@ sudo docker-compose -f docker-prod.yml run --rm --entrypoint 'sh' api
 
 The nginx reverse proxy will default to run on port 8000. You will most likely want to change the port that nginx runs on.
 See [Creating a proxy server for docker](Creating_a_proxy_server_for_docker.md) for more information on how to configure an nginx server to serve OwnRecipes.
+
+## Finish up
+
+The set up is complete and everything should be up and running.
+
+You can visit the [Admin Site](Admin_site.md), to create some more users, customize the news, or manage some lists.
+
+Or you can straight away log in to the OwnRecipes web app. By default, the url will be `http://localhost:8080`, or `http://<ownrecipes.domain.com>:8080`.

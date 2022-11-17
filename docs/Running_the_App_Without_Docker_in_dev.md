@@ -2,6 +2,17 @@
 
 Following this guide, you will set up the database MariaDB, the ownrecipes-api and ownrecipes-web.
 
+<details>
+  <summary>⚠ Note for Windows users</summary>
+  <p>
+    This documentation is written for Linux-based systems.
+    This documentation will not work with Windows, and you will have a hard time to get the set up done on Windows.
+  </p>
+  <p>
+    Your best bet is to use Linux, or docker.
+  </p>
+</details>
+
 ## Install Prerequisites
 
 `sudo apt install git build-essential`
@@ -252,5 +263,20 @@ npm install
 ### Run ownrecipes-web
 
 ```bash
+npm start
+```
+
+## Finish up
+
+The set up is complete and everything should be up and running.
+
+You can visit the [Admin Site](Admin_site.md), to create some more users, customize the news, or manage some lists.
+
+Or you can straight away log in to the OwnRecipes web app. By default, the url will be `http://localhost:8080`.
+
+OwnRecipes will shut down with your system. You can simply launch OwnRecipes by running:
+```bash
+cd /opt/ownrecipes/ownrecipes-web/
+sudo service ownrecipes start
 npm start
 ```
