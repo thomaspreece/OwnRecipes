@@ -165,7 +165,7 @@ The following environment variables can be applied to the ownrecipes-web/.env fi
 
 #### REACT_APP_API_URL
 The hostname/port (my.example.com:5210) the frontend will call the API from.
-If unset, the UI will call the API from the same hostname/port. If you are not using the default Nginx server that OwnRecipes comes with, you will either need to set this or configure your own proxy server to redirect all traffic that starts with `/api` or `/admin`.
+If unset, the UI will call the API from the same hostname/port. If you are not using the default Nginx server that OwnRecipes comes with, you will either need to set this or configure your own proxy server to redirect all traffic that starts with `/api/` and `/admin/`.
 
 EX: `REACT_APP_API_URL=http://localhost:5210`, `REACT_APP_API_URL=https://api.example.com`
 

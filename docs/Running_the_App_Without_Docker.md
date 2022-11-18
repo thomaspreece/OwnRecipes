@@ -145,7 +145,7 @@ It is HIGHLY recommended you eventually switch over to an HTTPS setup. Let's Enc
 
 `sudo apt-get install nginx`
 
-### Create symbolic links for Apache2
+### Create symbolic links for nginx
 
 ```bash
 mkdir /opt/ownrecipes/ownrecipes-nginx/
@@ -164,9 +164,16 @@ server {
     listen 80;
     server_name ownrecipes.com;
     disable_symlinks off;
-    root /opt/ownrecipes/ownrecipes-nginx/public-ui;
 
-    location /api {
+    location / {
+        root /opt/ownrecipes/ownrecipes-nginx/public-ui;
+        if ($uri = '/index.html') {
+            add_header Cache-Control no-store always;
+        }
+        try_files $uri $uri/ /index.html;
+    }
+
+    location /api/ {
         proxy_pass       http://127.0.0.1:5210;
         proxy_set_header Host $http_host;
         proxy_set_header X-Forwarded-Proto $scheme;
@@ -175,18 +182,18 @@ server {
         client_max_body_size 0;
     }
 
-    location /static-files {
+    location /static-files/ {
         autoindex on;
         root /opt/ownrecipes/ownrecipes-nginx;
     }
 
-    location /site-media {
+    location /site-media/ {
         autoindex on;
         root /opt/ownrecipes/ownrecipes-nginx;
     }
 
-    location /admin {
-        proxy_pass       http://127.0.0.1:5210/admin;
+    location /admin/ {
+        proxy_pass       http://127.0.0.1:5210/admin/;
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
