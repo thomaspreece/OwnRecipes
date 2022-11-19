@@ -141,10 +141,14 @@ EX: `ADMIN_URL=ownrecipes-admin`
 #### SITE_MEDIA_URL
 The url the media filse should be served from. Default is `site-media`.
 
+Is not supported for the docker production build.
+
 EX: `SITE_MEDIA_URL=ownrecipes-site-media`
 
 #### STATIC_FILES_URL
 The url the static files, like css files, should be served from. Default is `static-files`.
+
+Is not supported for the docker production build.
 
 EX: `STATIC_FILES_URL=ownrecipes-static-files`
 
