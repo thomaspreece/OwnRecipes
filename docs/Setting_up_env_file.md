@@ -127,11 +127,13 @@ EX: `NODE_URL=localhost:8080`
 #### HTTP_X_FORWARDED_PROTO
 If you are serving content behind an HTTPS proxy,
 set this to `True`, otherwise `False`.
-If you are using the docker configuation, set this to `True`.
 
 For more information, see: https://docs.djangoproject.com/en/1.10/ref/settings/#secure-proxy-ssl-header
 
-EX: `HTTP_X_FORWARDED_PROTO=False`
+If you are using the OwnRecipes' nginx,
+this setting will [activate the ssl encryption](Setting_up_https.md).
+
+EX: `HTTP_X_FORWARDED_PROTO=True`
 
 #### ADMIN_URL
 The url the Django Admin Pages should be served from. Default is `admin`.
@@ -141,10 +143,14 @@ EX: `ADMIN_URL=ownrecipes-admin`
 #### SITE_MEDIA_URL
 The url the media filse should be served from. Default is `site-media`.
 
+Is not supported for the docker production build.
+
 EX: `SITE_MEDIA_URL=ownrecipes-site-media`
 
 #### STATIC_FILES_URL
 The url the static files, like css files, should be served from. Default is `static-files`.
+
+Is not supported for the docker production build.
 
 EX: `STATIC_FILES_URL=ownrecipes-static-files`
 
@@ -165,7 +171,7 @@ The following environment variables can be applied to the ownrecipes-web/.env fi
 
 #### REACT_APP_API_URL
 The hostname/port (my.example.com:5210) the frontend will call the API from.
-If unset, the UI will call the API from the same hostname/port. If you are not using the default Nginx server that OwnRecipes comes with, you will either need to set this or configure your own proxy server to redirect all traffic that starts with `/api` or `/admin`.
+If unset, the UI will call the API from the same hostname/port. If you are not using the default Nginx server that OwnRecipes comes with, you will either need to set this or configure your own proxy server to redirect all traffic that starts with `/api/` and `/admin/`.
 
 EX: `REACT_APP_API_URL=http://localhost:5210`, `REACT_APP_API_URL=https://api.example.com`
 
