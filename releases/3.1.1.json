@@ -1,0 +1,8 @@
+{
+  "tag": "3.1.1",
+  "name": "Release 3.1.1",
+  "body": "Update from the previous version by following the [update guide](docs/Updating_the_App.md).\n\nFor a full list of changes see [Milestone v3.1.1](https://github.com/ownrecipes/OwnRecipes/milestone/4?closed=1).\n\nWeb:\n- Fixed the setup for docker production. ([#76](https://github.com/ownrecipes/OwnRecipes/issues/76), [#77](https://github.com/ownrecipes/OwnRecipes/issues/77))\n- Fixed the link to the admin page for docker production. ([#78](https://github.com/ownrecipes/OwnRecipes/issues/78))\n\nApi:\n- Add support for ssl for docker production [EXPERIMENTAL] ([#80](https://github.com/ownrecipes/OwnRecipes/issues/80))",
+  "target": "master",
+  "draft": false,
+  "prerelease": false
+}
