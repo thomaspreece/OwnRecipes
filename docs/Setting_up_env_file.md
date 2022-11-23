@@ -127,11 +127,13 @@ EX: `NODE_URL=localhost:8080`
 #### HTTP_X_FORWARDED_PROTO
 If you are serving content behind an HTTPS proxy,
 set this to `True`, otherwise `False`.
-If you are using the docker configuation, set this to `True`.
 
 For more information, see: https://docs.djangoproject.com/en/1.10/ref/settings/#secure-proxy-ssl-header
 
-EX: `HTTP_X_FORWARDED_PROTO=False`
+If you are using the OwnRecipes' nginx,
+this setting will [activate the ssl encryption](Setting_up_https.md).
+
+EX: `HTTP_X_FORWARDED_PROTO=True`
 
 #### ADMIN_URL
 The url the Django Admin Pages should be served from. Default is `admin`.

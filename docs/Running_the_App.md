@@ -127,11 +127,6 @@ sudo docker-compose -f docker-prod.yml run --rm --entrypoint 'sh' api
 ./manage.py loaddata ing_data.json
 ```
 
-## Setting up a Proxy Server and HTTPS
-
-The nginx reverse proxy will default to run on port 8000. You will most likely want to change the port that nginx runs on.
-See [Creating a proxy server for docker](Creating_a_proxy_server_for_docker.md) for more information on how to configure an nginx server to serve OwnRecipes.
-
 ## Finish up
 
 The set up is complete and everything should be up and running.
@@ -139,3 +134,13 @@ The set up is complete and everything should be up and running.
 You can visit the [Admin Site](Admin_site.md), to create some more users, customize the news, or manage some lists.
 
 Or you can straight away log in to the OwnRecipes web app. By default, the url will be `http://localhost:8080`, or `http://<ownrecipes.domain.com>:8080`.
+
+## Advanced setups
+
+### Setup HTTPS
+
+It is highly recommended that you serve your content over https. See [Setting up HTTPS](Setting_up_https.md) for more information on how to enable ssl.
+
+### Custom Proxy Server
+
+See [Creating a proxy server for docker](Creating_a_proxy_server_for_docker.md) for more information on how to configure a custom nginx server to serve OwnRecipes.
