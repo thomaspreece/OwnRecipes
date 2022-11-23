@@ -35,6 +35,7 @@ services:
       - static-files:/var/www/html/ownrecipes-static/static-files
       - site-media:/var/www/html/ownrecipes-static/site-media
       - public-ui:/var/www/html/ownrecipes-static/public-ui
+      # - /opt/ownrecipes/ssl:/ssl/
     depends_on:
       - api
       - web
