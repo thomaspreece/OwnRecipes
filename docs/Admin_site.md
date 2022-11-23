@@ -4,7 +4,7 @@ OwnRecipes uses the powerful Django Admin Site to make administrative tasks easy
 
 ## How to reach the admin site
 
-Once OwnRecipes is running, you can visit the admin site via the [configured url](Setting_up_env_file.md#adminurl).
+Once OwnRecipes is running, you can visit the admin site via the [configured url](Setting_up_env_file.md#admin_url).
 By default, that will be `<API_URL>/admin/`, ex. `https://my-ownrecipes-server.com/admin/` for production or
 `http://localhost:5210/admin/` for local development.
 
