@@ -280,3 +280,5 @@ cd /opt/ownrecipes/ownrecipes-web/
 sudo service ownrecipes start
 npm start
 ```
+
+If you encounter any issue, please read the [Troubleshooting guide](Troubleshooting.md).

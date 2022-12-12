@@ -220,6 +220,8 @@ You can visit the [Admin Site](Admin_site.md), to create some more users, custom
 
 Or you can straight away log in to the OwnRecipes web app. By default, the url will be `http://localhost:8080`, or `http://<ownrecipes.domain.com>:8080`.
 
+If you encounter any issue, please read the [Troubleshooting guide](Troubleshooting.md).
+
 ## Updating OwnRecipes
 
 `cd /opt/ownrecipes/`

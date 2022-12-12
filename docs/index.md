@@ -110,7 +110,7 @@ See the [open issues](https://github.com/ownrecipes/OwnRecipes/issues) for a ful
 
 ## Contributing
 
-Please read the [contribution guidelines](CONTRIBUTING.md) in order to make the contribution process easy and effective for everyone involved.
+Please read the [contribution guidelines](https://github.com/ownrecipes/OwnRecipes/blob/master/CONTRIBUTING.md) in order to make the contribution process easy and effective for everyone involved.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

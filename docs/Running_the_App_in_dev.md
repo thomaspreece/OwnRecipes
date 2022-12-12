@@ -34,6 +34,8 @@ sudo docker-compose --profile all build
 sudo docker-compose --profile all up
 ```
 
+All container, db, api and web, should start successfully. Check the terminal output for any error. If you encounter any issue, please read the [Troubleshooting guide](Troubleshooting.md).
+
 ## First Time Setup
 
 Seed the database.
@@ -69,6 +71,8 @@ OwnRecipes will shut down with your system. You can simply launch OwnRecipes by 
 cd OwnRecipes
 sudo docker-compose --profile all up
 ```
+
+If you encounter any issue, please read the [Troubleshooting guide](Troubleshooting.md).
 
 ## Updating to a new (develop) version
 

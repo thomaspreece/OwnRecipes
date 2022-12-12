@@ -70,8 +70,8 @@ Note that it is not necessary to specify the port.
 
 #### Note on the REACT_APP_API_URL option
 
-The NODE_API_URL specifies the URL that services use to contact the API.
-If you are running OwnRecipes on a port other than 80 or 443, it is necessary to specify this port in the NODE_API_URL option.
+The REACT_APP_API_URL specifies the URL that the web-app uses to contact the API.
+If you are running OwnRecipes on a port other than 80 or 443, it is necessary to specify this port in the REACT_APP_API_URL option.
 E.g. Given that the IP address for the OwnRecipes server is `192.168.0.12` and port is `1234`.
 
 ``REACT_APP_API_URL=http://192.168.0.1:1234``
@@ -107,7 +107,15 @@ The quick start script will do a few things.
 1. Creates a `docker-prod.version.yml` file with the required image tags.
 2. Downloads the required images.
 3. Takes a backup of the database and your images.
-4. Restarts the OwnRecipes servers.
+4. Restarts the OwnRecipes containers.
+
+After completing the startup, you should see the following line in your terminal:
+
+```
+App started. Please wait ~30 seconds for the containers to come online.
+```
+
+If you encounter any issue, please read the [Troubleshooting guide](Troubleshooting.md).
 
 ## First Time Setup
 
@@ -134,6 +142,8 @@ The set up is complete and everything should be up and running.
 You can visit the [Admin Site](Admin_site.md), to create some more users, customize the news, or manage some lists.
 
 Or you can straight away log in to the OwnRecipes web app. By default, the url will be `http://localhost:8080`, or `http://<ownrecipes.domain.com>:8080`.
+
+If you encounter any issue, please read the [Troubleshooting guide](Troubleshooting.md).
 
 ## Advanced setups
 
