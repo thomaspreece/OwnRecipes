@@ -5,12 +5,25 @@
 <details>
   <summary>Table of Contents</summary>
   <ol>
+    <li><a href="#docker-compose-throws-an-error">docker-compose throws an error</a></li>
     <li><a href="#can-not-create-a-superuser">Can not create a superuser</a></li>
     <li><a href="#the-docker-container-ownrecipes_web_1-exits">The docker container ownrecipes_web_1 exits</a></li>
     <li><a href="#browser-can-not-reach-the-web-app">Browser can not reach the web-app</a></li>
     <li><a href="#browser-can-not-connect-to-the-api">Browser can not connect to the api</a></li>
   </ol>
 </details>
+
+## docker-compose throws an error
+
+If running a `docker-compose`-command throws an error like:
+```
+ERROR: The Compose file './docker-prod.yml' is invalid because:
+services.api.depends_on contains an invalid type, it should be an array
+```
+
+Then your setup doesn't meet the [minimum requirement for docker-compose](Install_Prerequisites.md#note-on-docker-compose-version). Please follow the instructions to fix the setup.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Can not create a superuser
 

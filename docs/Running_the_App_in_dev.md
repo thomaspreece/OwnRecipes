@@ -34,6 +34,8 @@ sudo docker-compose --profile all build
 sudo docker-compose --profile all up
 ```
 
+_[Click here if docker-compose throws an error](Troubleshooting.md#docker-compose-throws-an-error)._
+
 All container, db, api and web, should start successfully. Check the terminal output for any error. If you encounter any issue, please read the [Troubleshooting guide](Troubleshooting.md).
 
 ## First Time Setup

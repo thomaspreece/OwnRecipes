@@ -125,6 +125,8 @@ sudo docker-compose -f docker-prod.yml run --rm --entrypoint 'python manage.py c
 ```
 Follow the prompts given to create your user. You can do this as many times as you like.
 
+_[Click here if docker-compose throws an error](Troubleshooting.md#docker-compose-throws-an-error)._
+
 If you want to add some test data you can load a few recipes and some news data. This data isn't really needed unless you just wanna see how the app looks and if its working.
 ```bash
 sudo docker-compose -f docker-prod.yml run --rm --entrypoint 'sh' api
