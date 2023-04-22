@@ -76,17 +76,6 @@ E.g. Given that the IP address for the OwnRecipes server is `192.168.0.12` and p
 
 ``REACT_APP_API_URL=http://192.168.0.1:1234``
 
-### Connecting to a remote DB
-If you are connecting the API to a remote DB (any non-dockerized DB) you need to setup the following configs to your env file.
-
-- [MYSQL_DATABASE](Setting_up_env_file.md#MYSQL_DATABASE)
-- [MYSQL_USER](Setting_up_env_file.md#MYSQL_USER)
-- [MYSQL_PASSWORD](Setting_up_env_file.md#MYSQL_PASSWORD)
-- [MYSQL_HOST](Setting_up_env_file.md#MYSQL_HOST)
-- [MYSQL_PORT](Setting_up_env_file.md#MYSQL_PORT)
-
-You will also need to edit your `docker-prod.yml` file to remove the database from the setup process. See [this docker yml](samples/sample_docker_prod_remote_db.yml) for an example.
-
 ## Start docker containers
 
 Once the files have been created run the command below and replace the version with version of OwnRecipes you want to run. You can also leave this blank (this will pull the latest code)
@@ -103,11 +92,15 @@ OR
 sudo ./quick-start.py --help
 ```
 
-The quick start script will do a few things.
-1. Creates a `docker-prod.version.yml` file with the required image tags.
-2. Downloads the required images.
-3. Takes a backup of the database and your images.
-4. Restarts the OwnRecipes containers.
+<details>
+  <summary>What exactly does the quick-start script do?</summary>
+  <ol>
+    <li>Creates a `docker-prod.version.yml` file with the required image tags.</li>
+    <li>Downloads the required images.</li>
+    <li>Takes a backup of the database and your images.</li>
+    <li>Restarts the OwnRecipes containers.</li>
+  </ol>
+</details>
 
 After completing the startup, you should see the following line in your terminal:
 
@@ -115,13 +108,15 @@ After completing the startup, you should see the following line in your terminal
 App started. Please wait ~30 seconds for the containers to come online.
 ```
 
+:warning: THE SETUP IS NOT COMPLETE, YET! Please follow the further instructions! :warning:
+
 If you encounter any issue, please read the [Troubleshooting guide](Troubleshooting.md).
 
 ## First Time Setup
 
 To create a super user:
 ``` bash
-sudo docker-compose -f docker-prod.yml run --rm --entrypoint 'python manage.py createsuperuser' api
+sudo docker compose -f docker-prod.yml run --rm --entrypoint 'python manage.py createsuperuser' api
 ```
 Follow the prompts given to create your user. You can do this as many times as you like.
 
@@ -129,7 +124,7 @@ _[Click here if docker-compose throws an error](Troubleshooting.md#docker-compos
 
 If you want to add some test data you can load a few recipes and some news data. This data isn't really needed unless you just wanna see how the app looks and if its working.
 ```bash
-sudo docker-compose -f docker-prod.yml run --rm --entrypoint 'sh' api
+sudo docker compose -f docker-prod.yml run --rm --entrypoint 'sh' api
 ./manage.py loaddata course_data.json
 ./manage.py loaddata cuisine_data.json
 ./manage.py loaddata news_data.json
@@ -156,3 +151,14 @@ It is highly recommended that you serve your content over https. See [Setting up
 ### Custom Proxy Server
 
 See [Creating a proxy server for docker](Creating_a_proxy_server_for_docker.md) for more information on how to configure a custom nginx server to serve OwnRecipes.
+
+### Connecting to a remote DB
+If you are connecting the API to a remote DB (any non-dockerized DB) you need to setup the following configs to your env file.
+
+- [MYSQL_DATABASE](Setting_up_env_file.md#MYSQL_DATABASE)
+- [MYSQL_USER](Setting_up_env_file.md#MYSQL_USER)
+- [MYSQL_PASSWORD](Setting_up_env_file.md#MYSQL_PASSWORD)
+- [MYSQL_HOST](Setting_up_env_file.md#MYSQL_HOST)
+- [MYSQL_PORT](Setting_up_env_file.md#MYSQL_PORT)
+
+You will also need to edit your `docker-prod.yml` file to remove the database from the setup process. See [this docker yml](samples/sample_docker_prod_remote_db.yml) for an example.

@@ -30,11 +30,11 @@ git clone https://github.com/ownrecipes/ownrecipes-web.git
 
 Then run it:
 ```bash
-sudo docker-compose --profile all build
-sudo docker-compose --profile all up
+sudo docker compose --profile all build
+sudo docker compose --profile all up
 ```
 
-_[Click here if docker-compose throws an error](Troubleshooting.md#docker-compose-throws-an-error)._
+_[Click here if docker compose throws an error](Troubleshooting.md#docker-compose-throws-an-error)._
 
 All container, db, api and web, should start successfully. Check the terminal output for any error. If you encounter any issue, please read the [Troubleshooting guide](Troubleshooting.md).
 
@@ -44,15 +44,15 @@ Seed the database.
 
 To create a super user:
 ``` bash
-sudo docker-compose run --rm --entrypoint 'python manage.py makemigrations' api
-sudo docker-compose run --rm --entrypoint 'python manage.py migrate' api
-sudo docker-compose run --rm --entrypoint 'python manage.py createsuperuser' api
+sudo docker compose run --rm --entrypoint 'python manage.py makemigrations' api
+sudo docker compose run --rm --entrypoint 'python manage.py migrate' api
+sudo docker compose run --rm --entrypoint 'python manage.py createsuperuser' api
 ```
 Follow the prompts given to create your user. You can do this as many times as you like.
 
 If you want to add some test data you can load a few recipes and some news data. This data isn't really needed unless you just wanna see how the app looks and if its working.
 ```bash
-sudo docker-compose run --rm --entrypoint 'sh' api
+sudo docker compose run --rm --entrypoint 'sh' api
 ./manage.py loaddata course_data.json
 ./manage.py loaddata cuisine_data.json
 ./manage.py loaddata news_data.json
@@ -71,7 +71,7 @@ Or you can straight away log in to the OwnRecipes web app. By default, the url w
 OwnRecipes will shut down with your system. You can simply launch OwnRecipes by running:
 ```bash
 cd OwnRecipes
-sudo docker-compose --profile all up
+sudo docker compose --profile all up
 ```
 
 If you encounter any issue, please read the [Troubleshooting guide](Troubleshooting.md).
@@ -89,7 +89,7 @@ have to clean up the related local docker stuff.
 First, clean up everything:
 ```bash
 cd OwnRecipes
-sudo docker-compose --profile all down
+sudo docker compose --profile all down
 ```
 
 Then, update your local repositories:

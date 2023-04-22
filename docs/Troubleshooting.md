@@ -15,6 +15,14 @@
 
 ## docker-compose throws an error
 
+If running a `docker compose`-command throws an error like:
+```
+docker: command not found
+```
+
+Then your setup is missing docker, or you are using the older docker-compose V1.
+In the latter case, use the older command `docker-compose`.
+
 If running a `docker-compose`-command throws an error like:
 ```
 ERROR: The Compose file './docker-prod.yml' is invalid because:
@@ -32,7 +40,7 @@ You have started the db and api, but can not [create the superuser](Running_the_
 Then probably your api can not connect to the db. Please double check your env-file (`.env.docker.production.api` when running via docker in production).
 The vars `MYSQL_DATABASE` and `MYSQL_ROOT_PASSWORD` are used to connect to the db, make sure they are correct.
 
-You may also want to check the terminal output for any errors during start. If you run the `quick-start.py`-script, then some errors may be hidden. Run the following command instead to get a more comprehensive output: `docker-compose -f docker-prod.yml -f docker-prod.override.yml -f docker-prod.version.yml restart`
+You may also want to check the terminal output for any errors during start. If you run the `quick-start.py`-script, then some errors may be hidden. Run the following command instead to get a more comprehensive output: `docker compose -f docker-prod.yml -f docker-prod.override.yml -f docker-prod.version.yml restart`
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

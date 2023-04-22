@@ -16,9 +16,9 @@ You can [install docker here](https://www.docker.com/community-edition#/download
 
 ### Required docker-compose version
 
-For this project it is recommended and tested to use [docker-compose v1.29.0](https://github.com/docker/compose/releases/tag/1.29.0) and later. There is also a [v2 of docker compose](https://docs.docker.com/compose/compose-v2/). That latest version should also work. but is umtested.
+For this project it is recommended and tested to use [docker-compose v1.29.0](https://github.com/docker/compose/releases/tag/1.29.0) and later.
 
-You can inspect the installed version by running ```docker-compose version```. If you want to install docker-compose via the OS software repository (e. g. via apt), then you can check the provided version by running ```apt-cache policy docker-compose```. If you want to stick with the docker-compose provided by your OS repository, then you can get OwnRecipes running with [docker-compose 1.25.0](https://github.com/docker/compose/releases/tag/1.25.0) and later, though you will need to make few adjustments as written below.
+You can inspect the installed version by running ```docker compose version``` if you are using docker-compose V2, or ```docker-compose version``` if you are using docker-compose V1. If you want to install docker-compose via the OS software repository (e. g. via apt), then you can check the provided version by running ```apt-cache policy docker-compose```. If you want to stick with the docker-compose provided by your OS repository, then you can get OwnRecipes running with [docker-compose 1.25.0](https://github.com/docker/compose/releases/tag/1.25.0) and later, though you will need to make few adjustments as written below.
 
 <details>
   <summary>Run OwnRecipes with docker-compose 1.25.0 and higher</summary>
