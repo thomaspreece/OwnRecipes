@@ -1,0 +1,8 @@
+{
+  "tag": "3.2.0",
+  "name": "Release 3.2.0",
+  "body": "Update from the previous version by following the [update guide](docs/Updating_the_App.md).\n\nFor a full list of changes see [Milestone v3.2.0](https://github.com/ownrecipes/OwnRecipes/milestone/3?closed=1).\n\nWeb:\n- Implement URI Fragments. You can now perma link to headings. ([#83](https://github.com/ownrecipes/OwnRecipes/issues/83))\n- Add grocery lists (this is HUGE!) ([#92](https://github.com/ownrecipes/OwnRecipes/issues/92))\n- Greatly improve accessibility ([#99](https://github.com/ownrecipes/OwnRecipes/issues/99))\n- Improve password inputs, with reveal button and capslock warning ([#100](https://github.com/ownrecipes/OwnRecipes/issues/100), [#101](https://github.com/ownrecipes/OwnRecipes/issues/101))\n- Add french translation. ([#89](https://github.com/ownrecipes/OwnRecipes/issues/89))\n\nApi:\n- Clean up orphan photo files. ([#14](https://github.com/ownrecipes/OwnRecipes/issues/14))\n- Support for docker compose V2 ([#98](https://github.com/ownrecipes/OwnRecipes/issues/98))",
+  "target": "master",
+  "draft": false,
+  "prerelease": false
+}
