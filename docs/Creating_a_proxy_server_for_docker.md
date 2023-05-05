@@ -6,7 +6,7 @@ To change the port from which OwnRecipes is served you will need to update the l
 - Open the docker-prod.override.yml (your docker-compose configuration) file.
 - To serve the app via port 7000:
 ``` yml
-version: '2.3'
+version: '3.1'
 services:
   nginx:
     ports:
@@ -15,7 +15,7 @@ services:
 
 - Restart your docker containers
 
-  - `sudo docker-compose -f docker-prod.yml -f docker-prod.override.yml -f docker-prod.version.yml restart`
+  - `sudo docker compose -f docker-prod.yml -f docker-prod.override.yml -f docker-prod.version.yml restart`
   - OR
   - Just run the `quick-start` script again: `./quick-start`
 - Load localhost:7000 to confirm it worked.

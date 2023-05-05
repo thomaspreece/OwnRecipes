@@ -3,7 +3,7 @@
 
 from time import sleep
 from os import getcwd, name as os_name
-from subprocess import call, Popen, PIPE
+from subprocess import call, Popen, DEVNULL, PIPE, STDOUT
 
 
 def update_image_tags(version=None):
@@ -16,7 +16,7 @@ def update_image_tags(version=None):
              With the version of each image to pull.
     """
     version = version if version is not None else 'latest'
-    version = '''version: '2.3'
+    version = '''version: '3.1'
 services:
   api:
     image: ownrecipes/ownrecipes-api:%s
@@ -40,6 +40,15 @@ def download_images(version=None):
     call(['docker', 'pull', 'ownrecipes/ownrecipes-nginx:' + version])
 
 
+def getDockerCompose():
+    """ Check if docker-compose V1 or V2 is available """
+    try:
+        Popen(['docker-compose', '--version'], stdin=DEVNULL, stdout=DEVNULL, stderr=STDOUT)
+        return 'docker-compose'
+    except OSError:
+        return 'docker compose'
+
+
 def start_containers():
     """
     Takes a back up of the Recipe images and DB.
@@ -48,6 +57,11 @@ def start_containers():
     print("==================")
     print("Starting OwnRecipes")
     print("==================")
+
+    dockerCompose = getDockerCompose()
+    if dockerCompose is None:
+        raise RuntimeError("docker-compose not found. Please install the requirements and try again.")
+    dockerComposeArr = dockerCompose.split(' ')
 
     # Check if the DB is up and running locally.
     # If it is then take a backup.
@@ -81,7 +95,7 @@ def start_containers():
         print("Using remote DB...")
     else:
         print("Creating the DB. This may take a minute...")
-        call(['docker-compose', '-f', 'docker-prod.yml', 'up', '-d', 'db'])
+        call([*dockerComposeArr, '-f', 'docker-prod.yml', 'up', '-d', 'db'])
         sleep(45)
 
     # Check if the API is up.
@@ -104,21 +118,21 @@ def start_containers():
     # Stop each container that needs to be updated.
     # Don't stop the DB! There is no reason to.
     call([
-        'docker-compose',
+        *dockerComposeArr,
         '-f', 'docker-prod.yml',
         '-f', 'docker-prod.version.yml',
         '-f', 'docker-prod.override.yml',
         'stop', 'nginx'
     ])
     call([
-        'docker-compose',
+        *dockerComposeArr,
         '-f', 'docker-prod.yml',
         '-f', 'docker-prod.version.yml',
         '-f', 'docker-prod.override.yml',
         'stop', 'api'
     ])
     call([
-        'docker-compose',
+        *dockerComposeArr,
         '-f', 'docker-prod.yml',
         '-f', 'docker-prod.version.yml',
         '-f', 'docker-prod.override.yml',
@@ -127,7 +141,7 @@ def start_containers():
 
     # Start all the containers
     call([
-        'docker-compose',
+        *dockerComposeArr,
         '-f', 'docker-prod.yml',
         '-f', 'docker-prod.version.yml',
         '-f', 'docker-prod.override.yml',

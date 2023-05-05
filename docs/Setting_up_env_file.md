@@ -136,19 +136,22 @@ this setting will [activate the ssl encryption](Setting_up_https.md).
 EX: `HTTP_X_FORWARDED_PROTO=True`
 
 #### ADMIN_URL
-The url the Django Admin Pages should be served from. Default is `admin`.
+The url the Django Admin Pages should be served from.
+Default: `admin`.
 
 EX: `ADMIN_URL=ownrecipes-admin`
 
 #### SITE_MEDIA_URL
-The url the media filse should be served from. Default is `site-media`.
+The url the media filse should be served from.
+Default: `site-media`.
 
 Is not supported for the docker production build.
 
 EX: `SITE_MEDIA_URL=ownrecipes-site-media`
 
 #### STATIC_FILES_URL
-The url the static files, like css files, should be served from. Default is `static-files`.
+The url the static files, like css files, should be served from.
+Default: `static-files`.
 
 Is not supported for the docker production build.
 
@@ -156,7 +159,7 @@ EX: `STATIC_FILES_URL=ownrecipes-static-files`
 
 #### RECIPE_IMAGE_QUALITY
 
-Automatically reduces the size and quality of large images to save disk storage space. Default: MEDIUM.
+Automatically reduces the size and quality of large images to save disk storage space. Default: `MEDIUM`.
 
 | Value  | File size (estimate) | Size (width x height) | Quality  |
 | ------ | -------------------- | --------------------- | -------- |
@@ -164,6 +167,16 @@ Automatically reduces the size and quality of large images to save disk storage 
 | HIGH   | 1200 kB              | 1920px x 1440px       | 97       |
 | MEDIUM | 600 kB               | 1440px x 1080px       | 94       |
 | LOW    | 350 kB               | 1024px x 768px        | 90       |
+
+EX: `RECIPE_IMAGE_QUALITY=OFF`
+
+#### DELETE_ORPHAN_FILES
+
+Automatically deletes unused photos and thumbnails. Set to `False` if you want to keep
+unused photos, or if you encounter any errors with deletion.
+Default: `True`
+
+EX: `DELETE_ORPHAN_FILES=False`
 
 ## Web config
 

@@ -17,9 +17,13 @@ services:
     volumes:
       - static-files:/code/static-files
       - site-media:/code/site-media
+    # This syntax requires docker-compose v1.29.0+.
     depends_on:
       db:
         condition: service_healthy
+    # This syntax is compatible with docker-compose v1.25.0+.
+    #depends_on:
+    #   - db
     env_file:
       - .env.docker.production.api
   web:

@@ -10,13 +10,12 @@ To only set up the api + MariaDB via docker, follow the guide [Running the App i
 
 You can only run the api + MariaDB like this:
 
-_Note: This will require docker-compose version 1.28+, as it makes use of the
-new profiles-feature._
+_Note: This will require docker-compose version 1.28+, as it makes use of the profiles-feature._
 
 ```bash
 cd OwnRecipes
-sudo docker-compose build
-sudo docker-compose up
+sudo docker compose build
+sudo docker compose up
 ```
 
 Then, [set up the web without docker for development](Running_the_App_Without_Docker_in_dev.md/#ownrecipes-web). If you didn't change the environment-files for ownrecipes-api, then you probably don't need to for ownrecipes-web, too! \o/
